@@ -221,3 +221,646 @@ h1 em{font-style:normal;color:var(--green)}
 </section>
 
 <div class="banner"><div><div class="eyebrow">A MEASURABLE TRANSITION</div><h3>Make every locally generated unit count.</h3><p>Distributed renewables, shared storage and transparent energy matching can work together to improve affordability and neighbourhood resilience.</p></div><strong>LOCAL → RESILIENT</strong></div>
+<div class="tabs">
+ <button class="tab active" data-tab="market">P2P Marketplace</button>
+ <button class="tab" data-tab="routing">Smart Routing</button>
+ <button class="tab" data-tab="lab">Resilience Lab</button>
+ <button class="tab" data-tab="advisor">AI Energy Advisor</button>
+</div>
+
+<section class="view active" id="market">
+ <div class="sectionHead"><div><div class="eyebrow">02 / LOCAL ENERGY EXCHANGE</div><h2>Peer-to-peer marketplace</h2><p>Match surplus energy with nearby demand using transparent indicative pricing.</p></div><span class="chip">SIMULATED TRADES</span></div>
+ <div class="two">
+  <article class="panel">
+   <div class="panelTop"><div><h3>Community energy offers</h3><p>Demo prosumer nodes</p></div><span class="chip">3 OFFERS</span></div>
+   <div class="trade"><div><strong>☀ Home A · Solar surplus</strong><small>Available now · local node</small></div><div class="price">₹4.20<small>2.4 kWh</small></div></div>
+   <div class="trade"><div><strong>⌂ Home D · Rooftop PV</strong><small>Available soon · local node</small></div><div class="price">₹4.35<small>1.8 kWh</small></div></div>
+   <div class="trade"><div><strong>▣ Shared battery pool</strong><small>Discharge window · 18:00</small></div><div class="price">₹4.60<small>3.0 kWh</small></div></div>
+   <div class="notice">Indicative demo prices only. No real electricity is transferred and no payment is processed.</div>
+  </article>
+  <article class="panel">
+   <div class="panelTop"><div><h3>Create a demo energy match</h3><p>Simulate a buyer–seller match</p></div><span class="chip">INTERACTIVE</span></div>
+   <label class="flabel">BUYER NODE</label>
+   <select class="field" id="buyer"><option>Home C</option><option>Home B</option><option>Community Hub</option></select>
+   <div class="formrow">
+    <div><label class="flabel">ENERGY (kWh)</label><input class="field" id="units" type="number" min=".5" max="5" step=".5" value="1.5"></div>
+    <div><label class="flabel">PRICE (₹/kWh)</label><input class="field" id="rate" type="number" min="1" max="15" step=".1" value="4.2"></div>
+   </div>
+   <button class="btn primary full" id="match">⚡ Run energy match</button>
+   <p class="muted" id="matchResult" style="font-size:10px">Your demo match result will appear here.</p>
+  </article>
+ </div>
+ <article class="panel" style="margin-top:12px">
+  <div class="panelTop"><div><h3>Session transaction ledger</h3><p>Simulated matches recorded in this browser session</p></div><span class="chip" id="ledgerCount">0 MATCHES</span></div>
+  <div id="ledger" class="muted" style="font-size:10px">No demo trades yet. Create a match to populate the ledger.</div>
+ </article>
+</section>
+
+<section class="view" id="routing">
+ <div class="sectionHead"><div><div class="eyebrow">03 / EXPLAINABLE INTELLIGENCE</div><h2>Smart energy routing</h2><p>See why the system chooses solar, storage or grid power.</p></div><span class="chip">RULE-BASED DISPATCH</span></div>
+ <div class="two">
+  <article class="panel"><div class="panelTop"><div><h3>Dispatch decision trace</h3><p>Rules applied to the selected hour</p></div></div><div id="routeDetail" class="steps"></div></article>
+  <article class="panel">
+   <div class="panelTop"><div><h3>Routing policy</h3><p>Transparent operating priorities</p></div></div>
+   <div class="steps">
+    <div class="step"><b>1</b><div><strong>Renewable-first consumption</strong><small>Use local solar to meet real-time demand.</small></div><em>HIGH</em></div>
+    <div class="step"><b>2</b><div><strong>Battery charge / discharge</strong><small>Store excess generation; discharge during shortfalls.</small></div><em>MED</em></div>
+    <div class="step"><b>3</b><div><strong>Utility balancing</strong><small>Import only after local flexibility is used.</small></div><em>LAST</em></div>
+   </div>
+   <div class="notice">This prototype uses a deterministic rule-based dispatch model. It is not connected to a utility control system.</div>
+  </article>
+ </div>
+</section>
+
+<section class="view" id="lab">
+ <div class="sectionHead"><div><div class="eyebrow">04 / CLIMATE RESILIENCE</div><h2>Neighbourhood resilience lab</h2><p>Stress-test the microgrid against disruption scenarios.</p></div><span class="chip">WHAT-IF SIMULATOR</span></div>
+ <div class="two">
+  <article class="panel">
+   <div class="panelTop"><div><h3>Choose a scenario</h3><p>Explore modelled responses</p></div></div>
+   <div class="steps">
+    <button class="step scenario" data-scenario="normal"><b>1</b><div><strong>Normal neighbourhood day</strong><small>Solar, battery and grid available.</small></div><em>BASE</em></button>
+    <button class="step scenario" data-scenario="cloud"><b>2</b><div><strong>Heavy cloud cover</strong><small>Solar output drops by 65%.</small></div><em>WEATHER</em></button>
+    <button class="step scenario" data-scenario="outage"><b>3</b><div><strong>Utility grid outage</strong><small>Grid unavailable; critical loads prioritised.</small></div><em>OUTAGE</em></button>
+    <button class="step scenario" data-scenario="peak"><b>4</b><div><strong>Evening demand spike</strong><small>Household demand rises by 45%.</small></div><em>PEAK</em></button>
+   </div>
+  </article>
+  <article class="panel">
+   <div class="panelTop"><div><h3>Scenario outcome</h3><p id="scenarioName">Normal neighbourhood day</p></div><span class="chip" id="scenarioStatus">STABLE</span></div>
+   <div class="impact" id="coverage">100% <small>modelled coverage</small></div>
+   <p id="scenarioText" class="muted" style="font-size:10px">Local generation and battery capacity meet the selected demand profile.</p>
+   <div class="impactGrid">
+    <div class="impactCell"><strong id="scSolar">8.4 kW</strong><small>SOLAR AVAILABLE</small></div>
+    <div class="impactCell"><strong id="scBattery">78%</strong><small>BATTERY STATE</small></div>
+    <div class="impactCell"><strong id="scGrid">0.0 kW</strong><small>GRID IMPORT</small></div>
+    <div class="impactCell"><strong id="scCritical">100%</strong><small>CRITICAL LOAD COVERAGE</small></div>
+   </div>
+   <div class="notice" id="scenarioAction">Maintain renewable-first dispatch and keep reserve capacity available.</div>
+  </article>
+ </div>
+</section>
+
+<section class="view" id="advisor">
+ <div class="sectionHead"><div><div class="eyebrow">05 / DECISION SUPPORT</div><h2>AI energy advisor</h2><p>Ask about the current demo system and receive actionable energy guidance.</p></div><span class="chip">GROQ-READY · OPTIONAL</span></div>
+ <div class="two">
+  <article class="ai">
+   <div class="panelTop"><div><h3>✦ Pulse Intelligence</h3><p>Energy decision assistant</p></div><span class="chip" id="aiMode">LOCAL DEMO</span></div>
+   <div class="aiout" id="aiOut">Hello! Ask me to explain the energy balance, suggest a battery charging window or describe what happens during a grid outage.</div>
+   <div class="airow"><input class="field" id="question" placeholder="e.g. When should the battery charge?"><button class="btn primary" id="ask">Ask ↗</button></div>
+   <p class="muted" style="font-size:9px">Model-backed responses require GROQ_API_KEY in Vercel. Local fallback works without a key.</p>
+  </article>
+  <article class="panel">
+   <div class="panelTop"><div><h3>Suggested questions</h3><p>Explore the system</p></div></div>
+   <div class="steps">
+    <button class="step suggest" data-question="Explain the current energy balance and the best next action."><b>↗</b><div><strong>Explain today's energy balance</strong><small>Understand generation, demand and surplus.</small></div></button>
+    <button class="step suggest" data-question="What is the best time to charge the battery and why?"><b>↗</b><div><strong>Optimise battery charging</strong><small>Find the solar charging window.</small></div></button>
+    <button class="step suggest" data-question="What should the microgrid do during a utility outage?"><b>↗</b><div><strong>Prepare for a grid outage</strong><small>Prioritise essential household loads.</small></div></button>
+   </div>
+   <div class="notice">AI is advisory only. No live sensors or utility control are connected.</div>
+  </article>
+ </div>
+</section>
+</main>
+
+<footer class="footer">
+ <span>© 2026 ECOPULSE · TEAM INNOVEXA · CODEQUEST 2026</span>
+ <span>*Illustrative estimates only · Not a live utility system</span>
+</footer>
+</div>
+<div class="toast" id="toast"></div>
+<script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
+<script>
+"use strict";
+
+const $ = id => document.getElementById(id);
+const state = {hour:12, trades:[], timer:null};
+const fmt = n => Number(n).toFixed(1);
+const clamp = (n,a,b) => Math.max(a,Math.min(b,n));
+
+function energyAt(h){
+ const solar=clamp(8.8*Math.max(0,Math.sin(Math.PI*(h-5)/14)),0,8.8);
+ const demand=2.4+1.7*Math.exp(-Math.pow((h-8)/2.3,2))
+ +2.6*Math.exp(-Math.pow((h-19)/3,2))
+ +.7*Math.exp(-Math.pow((h-13)/5,2));
+ const battery=clamp(55+23*Math.sin((h-7)/24*Math.PI*2),18,94);
+ const net=solar-demand;
+ const discharge=Math.max(0,-net*.42);
+ const charge=Math.max(0,net*.55);
+ const grid=Math.max(0,demand-solar-discharge);
+ return {solar,demand,battery,grid,discharge,charge,surplus:Math.max(0,net-charge)};
+}
+
+function updateDashboard(h){
+ state.hour=h;
+ const v=energyAt(h);
+ const renewable=Math.round(clamp((v.solar+v.discharge)/v.demand*100,0,100));
+ const co2=(Math.max(v.solar-v.grid,0)*.72+1.8).toFixed(1);
+
+ $("solar").innerHTML=fmt(v.solar)+' <small>kW</small>';
+ $("demand").innerHTML=fmt(v.demand)+' <small>kW</small>';
+ $("battery").innerHTML=Math.round(v.battery)+' <small>%</small>';
+ $("grid").innerHTML=fmt(v.grid)+' <small>kW</small>';
+
+ $("solarBar").style.width=(v.solar/9*100)+"%";
+ $("demandBar").style.width=(v.demand/9*100)+"%";
+ $("batteryBar").style.width=v.battery+"%";
+ $("gridBar").style.width=clamp(v.grid/5*100,3,100)+"%";
+
+ $("batteryFoot").textContent=fmt(v.battery/100*20)+" kWh available capacity";
+ $("gridFoot").textContent=v.grid<.1?"Local supply covers demand":"Grid balancing active";
+ $("heroSolar").textContent=fmt(v.solar)+" kW";
+ $("heroGrid").textContent=v.grid<.1?"Surplus":"Balancing";
+ $("cleanStat").textContent=renewable+"%";
+ $("carbonStat").textContent=co2+" kg";
+ $("hourLabel").textContent=String(h).padStart(2,"0")+":00";
+ $("hour").value=h;
+
+ $("timeHint").textContent=
+ h>=9&&h<=16
+ ?"Solar window: serve local loads first, then charge available storage."
+ :h>=17&&h<=22
+ ?"Evening peak: discharge stored energy before importing from the grid."
+ :"Low solar window: preserve battery reserve for essential demand.";
+
+ $("communityNote").innerHTML=
+ (v.surplus>.3
+ ?"✦ Local renewable supply exceeds demand."
+ :"✦ Local generation is lower than demand; storage and grid balancing are active.")
+ +"<br>Routing priority: solar → battery → utility grid.";
+
+ $("co2").innerHTML=co2+' <small>kg CO₂e</small>';
+ $("saving").textContent="₹ "+Math.round((v.solar-v.grid)*21);
+ $("renewable").textContent=renewable+"%";
+ $("matched").textContent=fmt(Math.max(0,v.surplus*.6+1.1))+" kWh";
+ $("backup").textContent=fmt(v.battery/100*5.4)+" h";
+
+ const rows=[
+  ["☀","Home A · Solar producer",v.solar*.34],
+  ["⌂","Home B · Flexible demand",v.demand*.23],
+  ["⌂","Home C · Consumer",v.demand*.27],
+  ["☀","Home D · Prosumer",v.solar*.2]
+ ];
+
+ $("nodes").innerHTML=rows.map(n=>`
+  <div class="nodeRow">
+   <div class="nodeIcon">${n[0]}</div>
+   <div><strong>${n[1]}</strong><small>PV / smart load profile</small></div>
+   <div class="power">${fmt(n[2])} kW</div>
+  </div>`).join("");
+
+ const steps=[
+  ["1","Serve household demand","Prioritise local rooftop solar for household loads.",Math.min(v.solar,v.demand)],
+  ["2",v.surplus>.1?"Charge shared storage":"Dispatch battery reserve",
+   v.surplus>.1?"Route surplus into community storage.":"Release stored energy to reduce grid imports.",
+   v.surplus>.1?v.charge:v.discharge],
+  ["3",v.grid<.1?"Avoid utility imports":"Balance remaining demand",
+   v.grid<.1?"Local supply covers modelled demand.":"Import only the remaining shortfall.",v.grid]
+ ];
+
+ const markup=steps.map(s=>`
+  <div class="step">
+   <b>${s[0]}</b>
+   <div><strong>${s[1]}</strong><small>${s[2]}</small></div>
+   <em>${fmt(s[3])} kW</em>
+  </div>`).join("");
+
+ $("dispatch").innerHTML=markup;
+ $("routeDetail").innerHTML=markup;
+ runScenario("normal");
+}
+
+$("hour").addEventListener("input",e=>{
+ clearInterval(state.timer);
+ state.timer=null;
+ $("play").textContent="▶";
+ updateDashboard(+e.target.value);
+});
+
+$("play").addEventListener("click",()=>{
+ if(state.timer){
+  clearInterval(state.timer);
+  state.timer=null;
+  $("play").textContent="▶";
+ }else{
+  $("play").textContent="Ⅱ";
+  state.timer=setInterval(()=>{
+   updateDashboard((state.hour+1)%24);
+  },850);
+ }
+});
+
+/* Navigation */
+function openTab(id){
+ document.querySelectorAll(".view").forEach(v=>{
+  v.classList.toggle("active",v.id===id);
+ });
+ document.querySelectorAll(".tab").forEach(b=>{
+  b.classList.toggle("active",b.dataset.tab===id);
+ });
+}
+
+document.querySelectorAll(".tab").forEach(b=>{
+ b.addEventListener("click",()=>openTab(b.dataset.tab));
+});
+
+/* Toast notification */
+function toast(message){
+ $("toast").textContent=message;
+ $("toast").classList.add("show");
+ setTimeout(()=>$("toast").classList.remove("show"),2300);
+}
+
+/* P2P demo marketplace */
+function renderLedger(){
+ $("ledgerCount").textContent=state.trades.length+" MATCHES";
+
+ if(!state.trades.length){
+  $("ledger").textContent="No demo trades yet. Create a match to populate the ledger.";
+  return;
+ }
+
+ $("ledger").innerHTML=state.trades.map((t,i)=>`
+  <div class="trade">
+   <div><strong>✓ Match #${i+1} · ${t.buyer}</strong>
+   <small>Local solar seller · ${t.time}</small></div>
+   <div class="price">${t.units} kWh
+   <small>₹${t.total.toFixed(2)} indicative</small></div>
+  </div>`).join("");
+}
+
+$("match").addEventListener("click",()=>{
+ const units=Number($("units").value);
+ const rate=Number($("rate").value);
+
+ if(!Number.isFinite(units)||units<.5||units>5||
+    !Number.isFinite(rate)||rate<1||rate>15){
+  toast("Energy: 0.5–5 kWh · price: ₹1–15");
+  return;
+ }
+
+ const trade={
+  buyer:$("buyer").value,
+  units:fmt(units),
+  total:units*rate,
+  time:new Date().toLocaleTimeString([],{hour:"2-digit",minute:"2-digit"})
+ };
+
+ state.trades.unshift(trade);
+ renderLedger();
+
+ $("matchResult").textContent=
+ "✓ Demo match created: "+fmt(units)+" kWh to "+trade.buyer+
+ " at ₹"+rate.toFixed(2)+"/kWh. Indicative value ₹"+
+ trade.total.toFixed(2)+".";
+
+ toast("Simulated match created — no payment taken.");
+});
+
+/* Resilience scenarios */
+function runScenario(type){
+ const v=energyAt(state.hour);
+ let solar=v.solar,demand=v.demand,grid=v.grid;
+ let coverage=100,critical=100;
+ let title="Normal neighbourhood day";
+ let status="STABLE";
+ let description="Local solar and battery capacity meet the selected demand profile.";
+ let action="Maintain renewable-first dispatch and keep reserve capacity available.";
+
+ if(type==="cloud"){
+  solar*=.35;
+  grid=Math.max(0,demand-solar-v.discharge);
+  coverage=clamp((solar+v.discharge+1.8)/demand*100,0,100);
+  title="Heavy cloud cover";
+  status="WEATHER STRESS";
+  description="Solar output falls by 65%. Battery contribution increases and grid balancing covers the remaining demand.";
+  action="Reserve battery for critical loads and defer flexible consumption until solar recovers.";
+ }
+
+ if(type==="outage"){
+  grid=0;
+  coverage=clamp((solar+v.discharge)/demand*100,0,100);
+  critical=clamp(coverage+22,0,100);
+  title="Utility grid outage";
+  status="ISLAND MODE";
+  description="Utility supply is unavailable. The model isolates the neighbourhood and prioritises essential loads using local solar and battery storage.";
+  action="Shed non-essential loads, preserve battery reserve and prioritise essential appliances.";
+ }
+
+ if(type==="peak"){
+  demand*=1.45;
+  grid=Math.max(0,demand-solar-v.discharge);
+  coverage=clamp((solar+v.discharge)/demand*100,0,100);
+  title="Evening demand spike";
+  status="PEAK LOAD";
+  description="Household demand rises by 45%. Storage is dispatched first; any remaining shortfall is balanced by the utility grid.";
+  action="Shift flexible appliances to the midday solar window and stagger high-power loads.";
+ }
+
+ $("scenarioName").textContent=title;
+ $("scenarioStatus").textContent=status;
+ $("coverage").innerHTML=Math.round(coverage)+'% <small>modelled coverage</small>';
+ $("scenarioText").textContent=description;
+ $("scSolar").textContent=fmt(solar)+" kW";
+ $("scBattery").textContent=Math.round(v.battery)+"%";
+ $("scGrid").textContent=fmt(grid)+" kW";
+ $("scCritical").textContent=Math.round(critical)+"%";
+ $("scenarioAction").textContent=action;
+}
+
+document.querySelectorAll(".scenario").forEach(b=>{
+ b.addEventListener("click",()=>{
+  runScenario(b.dataset.scenario);
+  toast("Scenario updated.");
+ });
+});
+
+/* Local AI fallback */
+function localAI(question){
+ const v=energyAt(state.hour);
+ const q=question.toLowerCase();
+
+ if(q.includes("battery")||q.includes("charg")){
+  return "At "+String(state.hour).padStart(2,"0")+":00, solar generation is "+
+   fmt(v.solar)+" kW against "+fmt(v.demand)+" kW demand. The best charging window is generally 10:00–15:00 when solar output is strongest. Serve local loads first, then route surplus to storage and preserve reserve for the evening peak.";
+ }
+
+ if(q.includes("outage")||q.includes("blackout")||q.includes("grid")){
+  return "During a utility outage, the model enters island-mode logic: grid import becomes zero, critical loads are prioritised, and local solar plus battery discharge serve demand. Defer flexible loads and preserve reserve. This is a simulated policy, not a real switching controller.";
+ }
+
+ return "At "+String(state.hour).padStart(2,"0")+":00, the model shows "+
+  fmt(v.solar)+" kW solar, "+fmt(v.demand)+" kW demand and "+
+  fmt(v.grid)+" kW grid import. Recommended action: prioritise local solar, use storage to smooth shortfalls, and schedule flexible loads around the midday generation window. Values are simulated, not live meter readings.";
+}
+
+/* Optional Groq-backed advisor */
+async function askAdvisor(question){
+ if(!question.trim())return;
+
+ $("aiOut").textContent="Analysing current microgrid state…";
+
+ const v=energyAt(state.hour);
+
+ try{
+  const response=await fetch("/api/ai",{
+   method:"POST",
+   headers:{"Content-Type":"application/json"},
+   body:JSON.stringify({
+    question,
+    context:{
+     hour:state.hour,
+     solar_kw:+fmt(v.solar),
+     demand_kw:+fmt(v.demand),
+     battery_percent:Math.round(v.battery),
+     grid_import_kw:+fmt(v.grid)
+    }
+   })
+  });
+
+  if(!response.ok)throw new Error("AI service unavailable");
+
+  const result=await response.json();
+  if(!result.reply)throw new Error("Empty response");
+
+  $("aiOut").textContent=result.reply;
+  $("aiMode").textContent="GROQ MODEL";
+
+ }catch(error){
+  $("aiOut").textContent=localAI(question)+
+   "\n\n(Local demo advisor. Configure GROQ_API_KEY in Vercel for model-backed responses.)";
+  $("aiMode").textContent="LOCAL DEMO";
+ }
+}
+
+$("ask").addEventListener("click",()=>{
+ const question=$("question").value;
+ $("question").value="";
+ askAdvisor(question);
+});
+
+$("question").addEventListener("keydown",e=>{
+ if(e.key==="Enter")$("ask").click();
+});
+
+document.querySelectorAll(".suggest").forEach(b=>{
+ b.addEventListener("click",()=>askAdvisor(b.dataset.question));
+});
+
+/* 3D energy globe using Three.js */
+function createGlobe(){
+ const canvas=$("globe");
+
+ try{
+  if(!window.THREE)throw new Error("Three.js unavailable");
+
+  const scene=new THREE.Scene();
+  const camera=new THREE.PerspectiveCamera(38,1,.1,100);
+  camera.position.z=5;
+
+  const renderer=new THREE.WebGLRenderer({
+   canvas,
+   alpha:true,
+   antialias:true
+  });
+
+  renderer.setPixelRatio(Math.min(devicePixelRatio,1.6));
+
+  const globe=new THREE.Group();
+  scene.add(globe);
+
+  const wire=new THREE.Mesh(
+   new THREE.IcosahedronGeometry(1.25,2),
+   new THREE.MeshBasicMaterial({
+    color:0x315c3b,
+    wireframe:true,
+    transparent:true,
+    opacity:.48
+   })
+  );
+  globe.add(wire);
+
+  const sphere=new THREE.Mesh(
+   new THREE.SphereGeometry(1.02,28,28),
+   new THREE.MeshBasicMaterial({
+    color:0x173622,
+    transparent:true,
+    opacity:.24
+   })
+  );
+  globe.add(sphere);
+
+  const points=[];
+  for(let i=0;i<90;i++){
+   const y=1-2*(i+.5)/90;
+   const radius=Math.sqrt(1-y*y);
+   const angle=Math.PI*(3-Math.sqrt(5))*i;
+   points.push(new THREE.Vector3(
+    Math.cos(angle)*radius,
+    y,
+    Math.sin(angle)*radius
+   ).multiplyScalar(1.28));
+  }
+
+  const pointGeometry=new THREE.BufferGeometry().setFromPoints(points);
+  globe.add(new THREE.Points(
+   pointGeometry,
+   new THREE.PointsMaterial({color:0xa7f36b,size:.035})
+  ));
+
+  for(let i=0;i<points.length;i+=4){
+   const line=new THREE.Line(
+    new THREE.BufferGeometry().setFromPoints([
+     points[i],points[(i+17)%points.length]
+    ]),
+    new THREE.LineBasicMaterial({
+     color:0x62d994,
+     transparent:true,
+     opacity:.24
+    })
+   );
+   globe.add(line);
+  }
+
+  const ring=new THREE.Mesh(
+   new THREE.TorusGeometry(1.62,.008,8,120),
+   new THREE.MeshBasicMaterial({
+    color:0x9bea68,
+    transparent:true,
+    opacity:.4
+   })
+  );
+
+  ring.rotation.x=1.1;
+  globe.add(ring);
+
+  function resize(){
+   const w=canvas.clientWidth||350;
+   const h=canvas.clientHeight||250;
+   renderer.setSize(w,h,false);
+   camera.aspect=w/h;
+   camera.updateProjectionMatrix();
+  }
+
+  resize();
+  window.addEventListener("resize",resize);
+
+  let rotation=0;
+
+  function animate(){
+   requestAnimationFrame(animate);
+   rotation+=.003;
+   globe.rotation.y=rotation;
+   globe.rotation.x=Math.sin(rotation*.6)*.12;
+   ring.rotation.z=rotation*.3;
+   renderer.render(scene,camera);
+  }
+
+  animate();
+
+ }catch(error){
+  /* 2D fallback if WebGL / Three.js is unavailable */
+  const ctx=canvas.getContext("2d");
+  let angle=0;
+
+  function drawFallback(){
+   const w=canvas.width=canvas.clientWidth*devicePixelRatio;
+   const h=canvas.height=canvas.clientHeight*devicePixelRatio;
+   ctx.clearRect(0,0,w,h);
+
+   const cx=w*.52,cy=h*.5;
+   const r=Math.min(w,h)*.34;
+
+   ctx.strokeStyle="#47714e";
+
+   for(let i=0;i<9;i++){
+    ctx.beginPath();
+    ctx.ellipse(cx,cy,r,r*(.22+i*.08),angle+i*.3,0,Math.PI*2);
+    ctx.stroke();
+   }
+
+   for(let i=0;i<30;i++){
+    const a=i*Math.PI*2/30+angle;
+    ctx.fillStyle="#a7f36b";
+    ctx.beginPath();
+    ctx.arc(cx+Math.cos(a)*r,cy+Math.sin(a)*r*.7,2*devicePixelRatio,0,Math.PI*2);
+    ctx.fill();
+   }
+
+   angle+=.004;
+   requestAnimationFrame(drawFallback);
+  }
+
+  drawFallback();
+ }
+}
+
+/* Animated energy-flow particles */
+function createFlow(){
+ const canvas=$("flow");
+ const ctx=canvas.getContext("2d");
+
+ const paths=[
+  [[.14,.27],[.50,.51]],
+  [[.14,.76],[.50,.51]],
+  [[.50,.51],[.86,.27]],
+  [[.50,.51],[.86,.76]]
+ ];
+
+ let tick=0;
+
+ function resize(){
+  const rect=canvas.getBoundingClientRect();
+  canvas.width=rect.width*devicePixelRatio;
+  canvas.height=rect.height*devicePixelRatio;
+ }
+
+ resize();
+ window.addEventListener("resize",resize);
+
+ function draw(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+
+  paths.forEach((path,index)=>{
+   const a={x:path[0][0]*canvas.width,y:path[0][1]*canvas.height};
+   const b={x:path[1][0]*canvas.width,y:path[1][1]*canvas.height};
+
+   ctx.strokeStyle=["#a7f36b","#78baff","#f3cf76","#4ee0a0"][index];
+   ctx.globalAlpha=.35;
+   ctx.setLineDash([5,7]);
+   ctx.beginPath();
+   ctx.moveTo(a.x,a.y);
+   ctx.lineTo(b.x,b.y);
+   ctx.stroke();
+   ctx.setLineDash([]);
+
+   for(let k=0;k<4;k++){
+    const progress=(tick*.003+k/4)%1;
+    ctx.globalAlpha=.9;
+    ctx.beginPath();
+    ctx.arc(
+     a.x+(b.x-a.x)*progress,
+     a.y+(b.y-a.y)*progress,
+     2.5*devicePixelRatio,0,Math.PI*2
+    );
+    ctx.fill();
+   }
+  });
+
+  ctx.globalAlpha=1;
+  tick++;
+  requestAnimationFrame(draw);
+ }
+
+ draw();
+}
+
+/* Initialisation */
+updateDashboard(12);
+createGlobe();
+createFlow();
+
+if("serviceWorker" in navigator && location.protocol.startsWith("http")){
+ navigator.serviceWorker.register("/sw.js").catch(()=>{});
+}
+</script>
+</body>
+</html>
