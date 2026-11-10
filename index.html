@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#07110d">
+<meta name="description" content="EcoPulse — Community Energy Intelligence">
+<link rel="manifest" href="/manifest.json">
+<title>EcoPulse | Community Energy Intelligence</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+ --bg:#07110d;--panel:#102219;--panel2:#142d1e;
+ --line:#294633;--text:#eff8ef;--muted:#91a997;
+ --green:#a7f36b;--mint:#4ee0a0;--blue:#78baff;
+ --gold:#f3cf76;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:radial-gradient(ellipse at 80% 0,#1b4930 0,transparent 36%),var(--bg);color:var(--text);font-family:Manrope,Arial,sans-serif}
+button,input,select{font:inherit}
+button{cursor:pointer}
+.shell{max-width:1380px;margin:auto;padding:0 26px 50px}
+header{height:72px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #ffffff18}
+.brand{display:flex;align-items:center;gap:12px;color:var(--text);text-decoration:none}
+.logo{width:39px;height:39px;border-radius:13px;background:linear-gradient(140deg,#d2ff91,#43d99b);display:grid;place-items:center;color:#092014;font-size:24px;font-weight:900}
+.brand strong{font-size:20px;letter-spacing:-1px}
+.brand strong span{color:var(--green)}
+.brand small{display:block;color:var(--muted);font:9px "DM Mono";letter-spacing:1.5px}
+.live{border:1px solid #426144;background:#12291a;color:#d5ffb6;padding:7px 11px;border-radius:30px;font:9px "DM Mono";letter-spacing:1px}
+.live i{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--mint);margin-right:7px}
+.hero{display:grid;grid-template-columns:1fr 1fr;align-items:center;min-height:380px;border-bottom:1px solid #ffffff18}
+.heroCopy{padding:45px 0}
+.eyebrow{font:10px "DM Mono";letter-spacing:2px;color:var(--green);text-transform:uppercase}
+h1{font-size:clamp(42px,5vw,70px);line-height:1.02;letter-spacing:-3px;margin:18px 0}
+h1 em{font-style:normal;color:var(--green)}
+.hero p{max-width:540px;color:#a8bcad;font-size:13px;line-height:1.9}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:25px}
+.btn{border:1px solid transparent;border-radius:9px;padding:12px 16px;font-size:11px;font-weight:800}
+.primary{background:var(--green);color:#0a1b10}
+.secondary{background:#14271b;color:var(--text);border-color:#456047}
+.heroVisual{height:340px;position:relative}
+#globe{width:100%;height:100%;display:block}
+.float{position:absolute;background:#0b1b12e8;border:1px solid #466348;border-radius:11px;padding:10px 13px}
+.float small{display:block;color:var(--muted);font:8px "DM Mono";letter-spacing:1px}
+.float strong{color:var(--green);font-size:15px}
+.f1{right:2%;top:15%}.f2{left:1%;bottom:13%}.f3{right:4%;bottom:4%}
+.stats{display:flex;gap:27px;margin-top:27px}
+.stats strong{display:block;font-size:19px}
+.stats small{font:9px "DM Mono";color:var(--muted)}
+.sectionHead{display:flex;justify-content:space-between;align-items:end;gap:12px;margin:27px 0 14px}
+.sectionHead h2{font-size:18px;margin:5px 0}
+.sectionHead p{font-size:10px;color:var(--muted);margin:0}
+.chip{border:1px solid #38583e;background:#142b1c;color:#d0f6b1;border-radius:30px;padding:6px 10px;font:9px "DM Mono";white-space:nowrap}
+.metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:11px}
+.metric,.panel{background:linear-gradient(145deg,#12271b,#0c1b12);border:1px solid var(--line);border-radius:15px}
+.metric{padding:16px;overflow:hidden}
+.metric label{font:9px "DM Mono";color:var(--muted);letter-spacing:1px}
+.metric .value{font-size:29px;font-weight:800;margin:9px 0 2px}
+.metric .value small{font-size:11px;color:var(--muted)}
+.metric p{font-size:10px;color:var(--muted);margin:0}
+.bar{height:4px;background:#294331;border-radius:5px;margin-top:13px;overflow:hidden}
+.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--mint),var(--green));border-radius:5px}
+.grid{display:grid;grid-template-columns:1.3fr .8fr;gap:12px;margin-top:12px}
+.panel{padding:17px;min-width:0}
+.panelTop{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:14px}
+.panel h3{font-size:13px;margin:0}
+.panelTop p{font-size:10px;color:var(--muted);margin:4px 0 0}
+.flow{height:235px;position:relative;overflow:hidden;border:1px solid #294331;border-radius:12px;background:radial-gradient(ellipse,#193c27,transparent 70%),#0a190f}
+#flow{width:100%;height:100%;display:block;position:absolute;inset:0}
+.node{position:absolute;transform:translate(-50%,-50%);text-align:center;font:9px "DM Mono";color:#e1f0e2}
+.node b{width:43px;height:43px;border-radius:13px;border:1px solid #66864f;background:#142e1c;display:grid;place-items:center;font-size:18px;margin:auto auto 4px}
+.nsolar{left:14%;top:27%}.nbat{left:14%;top:76%}.ncore{left:50%;top:51%}.ngrid{left:86%;top:27%}.nhomes{left:86%;top:76%}
+.ncore b{width:58px;height:58px;border-radius:50%;font-size:24px;border-color:var(--green)}
+.legend{display:flex;gap:14px;flex-wrap:wrap;margin-top:10px;color:var(--muted);font:9px "DM Mono"}
+.dot{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:5px}
+.controls{display:flex;align-items:center;gap:10px;margin-top:13px;padding-top:12px;border-top:1px solid #294331}
+.controls input{flex:1;accent-color:var(--green)}
+.time{color:var(--green);font:11px "DM Mono"}
+.play{background:#183321;color:var(--green);border:1px solid #4b6c4b;border-radius:8px;padding:6px 10px}
+.nodeRow{display:grid;grid-template-columns:33px 1fr auto;align-items:center;gap:9px;padding:11px 0;border-bottom:1px solid #294331}
+.nodeRow:last-child{border:0}
+.nodeIcon{width:32px;height:32px;border-radius:9px;background:#1a3825;display:grid;place-items:center}
+.nodeRow strong{font-size:10px}
+.nodeRow small{display:block;color:var(--muted);font:9px "DM Mono"}
+.power{color:var(--green);font:10px "DM Mono"}
+.notice{margin-top:12px;padding:11px;border:1px solid #456243;background:#142c1b;border-radius:10px;color:#c9e9c1;font-size:10px;line-height:1.7}
+.lower{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-top:12px}
+.chart{width:100%;height:140px}
+.chart text{fill:#91a997;font:9px "DM Mono"}
+.chart .gridline{stroke:#294633;stroke-dasharray:3 5}
+.chart .solar{fill:none;stroke:var(--green);stroke-width:2.5}
+.chart .demand{fill:none;stroke:var(--blue);stroke-width:2;stroke-dasharray:5 4}
+.impact{font-size:32px;font-weight:800;color:var(--green);margin:9px 0}
+.impact small{font-size:11px;color:var(--muted)}
+.impactGrid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
+.impactCell{padding:10px;background:#102319;border:1px solid #294331;border-radius:9px}
+.impactCell strong{font-size:15px;display:block}
+.impactCell small{font:8px "DM Mono";color:var(--muted)}
+.steps{display:grid;gap:9px}
+.step{display:grid;grid-template-columns:28px 1fr auto;align-items:center;gap:9px;padding:11px;border:1px solid #294331;border-radius:10px;background:#0e1e14;color:var(--text);text-align:left}
+.step b{width:26px;height:26px;border-radius:50%;background:#1c3b25;color:var(--green);display:grid;place-items:center;font:10px "DM Mono"}
+.step strong{font-size:10px}
+.step small{display:block;color:var(--muted);font-size:9px}
+.step em{font:9px "DM Mono";color:var(--green);font-style:normal}
+.banner{display:flex;justify-content:space-between;align-items:center;gap:15px;padding:18px;margin-top:13px;border:1px solid #456243;border-radius:14px;background:linear-gradient(100deg,#183b24,#10251a)}
+.banner h3{font-size:16px;margin:5px 0}
+.banner p{font-size:10px;color:#a8bcad;margin:0;max-width:650px}
+.banner strong{font-size:23px;color:var(--green)}
+.tabs{display:flex;gap:7px;overflow:auto;margin:27px 0 14px}
+.tab{border:1px solid #2b4632;background:#0d1c13;color:var(--muted);border-radius:30px;padding:9px 14px;font-size:10px;white-space:nowrap}
+.tab.active{background:#203d26;border-color:#719d54;color:#ddffb9}
+.view{display:none}.view.active{display:block}
+.two{display:grid;grid-template-columns:1.1fr .9fr;gap:12px}
+.trade{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid #294331;gap:10px}
+.trade strong{font-size:11px}.trade small{display:block;color:var(--muted);font:9px "DM Mono"}
+.price{color:var(--green);font:11px "DM Mono";text-align:right}
+.field{width:100%;border:1px solid #36543d;background:#08150d;color:var(--text);border-radius:9px;padding:10px;outline:none}
+.field:focus{border-color:var(--green)}
+.flabel{display:block;color:var(--muted);font:9px "DM Mono";margin:12px 0 5px}
+.formrow{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.full{width:100%;margin-top:13px}
+.ai{background:radial-gradient(ellipse at 100% 0,#1d4229,#0c1c13 65%);border:1px solid #36583c;border-radius:14px;padding:16px}
+.aiout{min-height:100px;white-space:pre-wrap;line-height:1.8;font-size:11px;margin:12px 0}
+.airow{display:flex;gap:8px}.airow input{flex:1;min-width:0}
+.footer{display:flex;justify-content:space-between;gap:12px;border-top:1px solid #ffffff18;margin-top:30px;padding-top:16px;color:#718b79;font:9px "DM Mono"}
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#d8ffc0;color:#0a1c10;border-radius:30px;padding:10px 16px;font-weight:800;font-size:10px;opacity:0;transition:.2s;z-index:20}
+.toast.show{opacity:1}
+@media(max-width:900px){.metrics{grid-template-columns:repeat(2,1fr)}.lower{grid-template-columns:1fr 1fr}.lower .panel:last-child{grid-column:span 2}}
+@media(max-width:650px){.shell{padding:0 12px 45px}header{height:62px}.hero{display:block}.heroCopy{padding:32px 0 0}h1{font-size:44px}.heroVisual{height:245px;margin-top:-5px}.metrics{gap:8px}.metric{padding:12px}.metric .value{font-size:25px}.grid,.two{grid-template-columns:1fr}.lower{grid-template-columns:1fr}.lower .panel:last-child{grid-column:auto}.panel{padding:14px}.flow{height:215px}.banner{align-items:flex-start;flex-direction:column}.footer{display:block;line-height:2}}
+</style>
+</head>
+<body>
+<div class="shell">
+<header>
+ <a class="brand" href="#"><div class="logo">ϟ</div><div><strong>Eco<span>Pulse</span></strong><small>COMMUNITY ENERGY INTELLIGENCE</small></div></a>
+ <span class="live"><i></i>DEMO SIMULATION</span>
+</header>
+
+<main>
+<section class="hero">
+ <div class="heroCopy">
+  <div class="eyebrow">THE NEIGHBOURHOOD ENERGY NETWORK</div>
+  <h1>Energy that<br>thinks <em>together.</em></h1>
+  <p>A community-first smart microgrid that balances local solar generation, battery storage and peer-to-peer energy exchange — turning every neighbourhood into a more resilient energy ecosystem.</p>
+  <div class="actions">
+   <button class="btn primary" onclick="document.getElementById('overview').scrollIntoView({behavior:'smooth'})">Explore live system ↗</button>
+   <button class="btn secondary" onclick="openTab('market')">Open energy marketplace</button>
+  </div>
+  <div class="stats">
+   <div><strong>04</strong><small>CONNECTED NODES</small></div>
+   <div><strong id="cleanStat">78%</strong><small>RENEWABLE SHARE</small></div>
+   <div><strong id="carbonStat">12.4 kg</strong><small>CO₂ AVOIDED*</small></div>
+  </div>
+ </div>
+ <div class="heroVisual">
+  <canvas id="globe"></canvas>
+  <div class="float f1"><small>COMMUNITY SOLAR</small><strong id="heroSolar">8.4 kW</strong></div>
+  <div class="float f2"><small>ENERGY EXCHANGE</small><strong>Peer-to-peer</strong></div>
+  <div class="float f3"><small>GRID STATUS</small><strong id="heroGrid">Surplus</strong></div>
+ </div>
+</section>
+
+<div class="sectionHead" id="overview">
+ <div><div class="eyebrow">01 / SYSTEM OVERVIEW</div><h2>Community energy at a glance</h2><p>Illustrative operating data · move the time slider to explore the daily energy curve</p></div>
+ <span class="chip">MODEL v2 · SIMULATED</span>
+</div>
+
+<section class="metrics">
+ <article class="metric"><label>SOLAR GENERATION</label><div class="value" id="solar">8.4 <small>kW</small></div><p>Renewable rooftop supply</p><div class="bar"><i id="solarBar" style="width:84%"></i></div></article>
+ <article class="metric"><label>COMMUNITY DEMAND</label><div class="value" id="demand">6.2 <small>kW</small></div><p>Four household nodes</p><div class="bar"><i id="demandBar" style="width:62%"></i></div></article>
+ <article class="metric"><label>BATTERY STORAGE</label><div class="value" id="battery">78 <small>%</small></div><p id="batteryFoot">15.6 kWh available capacity</p><div class="bar"><i id="batteryBar" style="width:78%"></i></div></article>
+ <article class="metric"><label>GRID IMPORT</label><div class="value" id="grid">0.0 <small>kW</small></div><p id="gridFoot">Local supply covers demand</p><div class="bar"><i id="gridBar" style="width:3%"></i></div></article>
+</section>
+
+<section class="grid">
+ <article class="panel">
+  <div class="panelTop"><div><h3>Intelligent energy flow</h3><p>How power moves across the microgrid</p></div><span class="chip">LIVE MODEL</span></div>
+  <div class="flow">
+   <canvas id="flow"></canvas>
+   <div class="node nsolar"><b>☀</b>SOLAR</div><div class="node nbat"><b>▣</b>STORAGE</div>
+   <div class="node ncore"><b>ϟ</b>MICROGRID</div><div class="node ngrid"><b>⇄</b>UTILITY</div><div class="node nhomes"><b>⌂</b>HOMES</div>
+  </div>
+  <div class="legend"><span><i class="dot" style="background:#a7f36b"></i>Renewable flow</span><span><i class="dot" style="background:#78baff"></i>Grid / storage</span><span><i class="dot" style="background:#f3cf76"></i>Peer exchange</span></div>
+  <div class="controls"><span class="time">TIME</span><input id="hour" type="range" min="0" max="23" value="12"><span class="time" id="hourLabel">12:00</span><button class="play" id="play">▶</button></div>
+  <p class="muted" id="timeHint" style="font-size:10px">Midday solar surplus can charge storage and support nearby homes.</p>
+ </article>
+ <article class="panel">
+  <div class="panelTop"><div><h3>Neighbourhood network</h3><p>Illustrative household energy nodes</p></div><span class="chip">04 ACTIVE</span></div>
+  <div id="nodes"></div>
+  <div class="notice" id="communityNote">Local renewable supply exceeds demand.</div>
+ </article>
+</section>
+
+<section class="lower">
+ <article class="panel">
+  <div class="panelTop"><div><h3>Generation vs demand</h3><p>Illustrative 24-hour energy profile</p></div><span class="chip">kW</span></div>
+  <svg class="chart" viewBox="0 0 480 145" preserveAspectRatio="none">
+   <path class="gridline" d="M25 20H470M25 58H470M25 96H470M25 128H470"/>
+   <path class="solar" d="M25 120 C70 118 95 100 130 58 S190 20 230 30 S300 82 340 100 S420 122 470 124"/>
+   <path class="demand" d="M25 90 C65 82 92 77 130 81 S195 72 230 69 S300 76 340 72 S420 62 470 58"/>
+   <g><text x="24" y="143">00</text><text x="135" y="143">06</text><text x="245" y="143">12</text><text x="355" y="143">18</text><text x="455" y="143">24</text></g>
+  </svg>
+  <div class="legend"><span><i class="dot" style="background:#a7f36b"></i>Solar</span><span><i class="dot" style="background:#78baff"></i>Demand</span></div>
+ </article>
+ <article class="panel">
+  <div class="panelTop"><div><h3>Community impact</h3><p>Modelled demo-session outcomes</p></div><span class="chip">ESTIMATES*</span></div>
+  <div class="impact" id="co2">12.4 <small>kg CO₂e</small></div><p class="muted" style="font-size:10px">Estimated emissions avoided</p>
+  <div class="impactGrid">
+   <div class="impactCell"><strong id="saving">₹186</strong><small>MODELLED SAVINGS</small></div>
+   <div class="impactCell"><strong id="renewable">78%</strong><small>RENEWABLE SHARE</small></div>
+   <div class="impactCell"><strong id="matched">3.6 kWh</strong><small>PEER ENERGY MATCHED</small></div>
+   <div class="impactCell"><strong id="backup">4.2 h</strong><small>BACKUP COVERAGE*</small></div>
+  </div>
+ </article>
+ <article class="panel">
+  <div class="panelTop"><div><h3>Explainable dispatch</h3><p>Transparent routing decisions</p></div><span class="chip">RULE ENGINE</span></div>
+  <div class="steps" id="dispatch"></div>
+ </article>
+</section>
+
+<div class="banner"><div><div class="eyebrow">A MEASURABLE TRANSITION</div><h3>Make every locally generated unit count.</h3><p>Distributed renewables, shared storage and transparent energy matching can work together to improve affordability and neighbourhood resilience.</p></div><strong>LOCAL → RESILIENT</strong></div>
