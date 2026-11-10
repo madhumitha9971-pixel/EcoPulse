@@ -1,355 +1,421 @@
-EcoPulse — Forecast · Route · Protect ⚡
 
-The neighbourhood grid that keeps the lights on for those who need it most.
+  ⚡ ECOPULSE
 
-An AI-powered smart microgrid and peer-to-peer energy routing platform with Lifeline-First protection.
+THE INTELLIGENT NEIGHBOURHOOD ENERGY GRID
 
-CODEQUEST 2026 · Team Innovexa · Team ID: madhumitha9971
+Forecast. Route. Protect.
 
-"GitHub Repository" (https://github.com/madhumitha9971-pixel/EcoPulse)
+<p align="center">
+  <strong>Turning wasted rooftop solar into neighbourhood power — while protecting the people who need electricity most.</strong>
+</p><p align="center">
+  <a href="YOUR_VERCEL_DEMO_URL">
+    <img src="https://img.shields.io/badge/🚀_LIVE_DEMO-Visit_EcoPulse-00C853?style=for-the-badge" alt="Live Demo">
+  </a>
+  <a href="https://github.com/madhumitha9971-pixel/EcoPulse">
+    <img src="https://img.shields.io/badge/GitHub-Repository-181717?style=for-the-badge&logo=github" alt="GitHub">
+  </a>
+</p><p align="center">
+  <img src="https://img.shields.io/badge/Competition-CODEQUEST_2026-blueviolet?style=flat-square">
+  <img src="https://img.shields.io/badge/Team-Innovexa-00A6A6?style=flat-square">
+  <img src="https://img.shields.io/badge/Category-AI_&_Sustainability-brightgreen?style=flat-square">
+  <img src="https://img.shields.io/badge/Status-Prototype-orange?style=flat-square">
+</p><p align="center">
+  <img src="https://img.shields.io/badge/HTML5-E34F26?style=flat-square&logo=html5&logoColor=white">
+  <img src="https://img.shields.io/badge/CSS3-1572B6?style=flat-square&logo=css3&logoColor=white">
+  <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=javascript&logoColor=black">
+  <img src="https://img.shields.io/badge/Three.js-black?style=flat-square&logo=threedotjs&logoColor=white">
+  <img src="https://img.shields.io/badge/Groq_API-F55036?style=flat-square">
+  <img src="https://img.shields.io/badge/Vercel-000000?style=flat-square&logo=vercel&logoColor=white">
+  <img src="https://img.shields.io/badge/PWA-5A0FC8?style=flat-square">
+</p>---
+
+🌍 THE VISION
+
+What if your neighbourhood could generate, share and protect its own electricity?
+
+Every afternoon, rooftop solar panels generate more electricity than some households can consume. Every evening, the same neighbourhood experiences peak demand and higher electricity costs.
+
+Meanwhile, households that depend on electricity for essential medical equipment can face serious risks during unexpected power failures.
+
+The problem is not just electricity generation.
+
+It is how intelligently we distribute, prioritise and protect the energy we already have.
+
+EcoPulse introduces a neighbourhood-level intelligent energy coordination platform that forecasts demand, routes surplus renewable energy and prioritises critical household reserves.
+
+«Our promise: Trade fairly. Protect first. Power every neighbourhood.»
 
 ---
 
-🌍 1. The Problem
+📌 TABLE OF CONTENTS
 
-Rooftop solar is wasted at noon. The same neighbourhoods overpay at 7 PM.
-
-Urban neighbourhoods are experiencing a growing mismatch between renewable energy generation and electricity consumption.
-
-- Solar energy wastage: Rooftop solar systems often generate more electricity than a household can immediately consume.
-- Evening peak demand: Electricity demand rises after sunset, increasing pressure on local distribution networks.
-- Limited local energy exchange: Neighbours with surplus solar power lack a simple, coordinated mechanism to share it with nearby consumers.
-- Grid vulnerability: Central grid failures can leave households without electricity, including people who depend on powered medical equipment.
-- Lack of intelligent coordination: Traditional distribution systems do not provide neighbourhood-level visibility into local supply, demand and energy priorities.
-
-Who benefits?
-
-User group| Problem
-Rooftop solar homeowners| Unused surplus generation
-Neighbourhood consumers| Higher evening electricity costs
-Medical-critical households| Risk of losing essential backup power
-EV charging stations| Need for locally available energy
-Local utilities| Evening demand and transformer stress
-
-The opportunity: Instead of treating every household as an isolated electricity consumer, EcoPulse connects neighbourhood energy resources into an intelligent, coordinated microgrid.
+1. "The Problem" (#-the-problem)
+2. "Our Solution" (#-our-solution)
+3. "The Innovation — Lifeline-First Routing" (#-the-innovation--lifeline-first-routing)
+4. "Key Features" (#-key-features)
+5. "How EcoPulse Works" (#-how-ecopulse-works)
+6. "System Architecture" (#-system-architecture)
+7. "Technology Stack" (#-technology-stack)
+8. "Innovation Comparison" (#-why-ecopulse-is-different)
+9. "Expected Impact" (#-expected-impact)
+10. "Demo Walkthrough" (#-demo-walkthrough)
+11. "Run Locally" (#-run-locally)
+12. "Deployment" (#-deployment)
+13. "Privacy and Responsible Design" (#-privacy-and-responsible-design)
+14. "Limitations and Future Roadmap" (#-limitations-and-future-roadmap)
+15. "Repository Structure" (#-repository-structure)
+16. "Team" (#-team)
 
 ---
 
-💡 2. Our Solution
+🔴 1. THE PROBLEM
 
-EcoPulse forecasts, routes and protects neighbourhood energy.
+Three energy problems. One neighbourhood.
 
-EcoPulse is a smart microgrid coordination prototype that combines energy forecasting, peer-to-peer energy matching, dynamic pricing and emergency reserve prioritisation.
+Problem| What happens
+☀️ Solar wastage| Excess rooftop solar is not always used locally
+⚡ Peak-hour pressure| Evening demand increases grid congestion and electricity costs
+🔌 No local energy exchange| Neighbours lack a coordinated way to share surplus energy
+🏥 Critical power vulnerability| Essential household energy needs may be affected by outages
 
-It transforms individual energy resources into a coordinated neighbourhood network.
+Our target users
+
+- Urban homeowners with rooftop solar.
+- Neighbourhood consumers who need affordable electricity.
+- Households dependent on essential powered equipment.
+- EV charging stations.
+- Local utilities managing peak demand.
+
+The opportunity: Connect individual energy resources into an intelligent neighbourhood network.
+
+---
+
+💡 2. OUR SOLUTION
+
+EcoPulse — An AI-powered neighbourhood energy intelligence platform.
+
+EcoPulse combines energy forecasting, peer-to-peer energy coordination, intelligent allocation and emergency reserve prioritisation.
 
 Three core capabilities
 
-1. 24-hour Energy Intelligence
-   
-   Forecasts neighbourhood electricity supply and demand to anticipate surplus generation, consumption peaks and potential shortages.
+01 — 24-Hour AI Energy Forecast
 
-2. Automated Peer-to-Peer Energy Routing
-   
-   Matches surplus renewable energy with nearby demand, helping neighbourhoods use locally generated electricity more efficiently.
+Predicts expected neighbourhood energy supply and demand to identify potential shortages, surplus generation and consumption peaks.
 
-3. Smart Outage Shield
-   
-   Simulates a central grid outage and prioritises locally available backup energy for critical neighbourhood needs.
+02 — Automated Peer-to-Peer Energy Routing
 
-Our unique innovation: Lifeline-First Routing
+Coordinates surplus energy with nearby demand, helping make better use of locally generated renewable electricity.
 
-People before price.
+03 — Smart Outage Shield
 
-Most energy optimisation systems focus primarily on cost and efficiency. EcoPulse introduces a protected reserve floor for households that voluntarily opt into medical-critical energy prioritisation.
+Demonstrates how local battery resources can be prioritised during a central grid failure.
 
-- A minimum energy reserve is protected.
-- Critical households receive priority during energy shortages.
-- Surplus energy is considered for trading only after the protected reserve requirement is satisfied.
-- The optimisation logic treats social priority as a constraint, not merely a pricing preference.
+The result
 
-The principle is simple: energy trading must never come before essential human needs.
+A neighbourhood energy network designed around three priorities:
+
+- Efficiency.
+- Fairness.
+- Human safety.
 
 ---
 
-🚀 3. Key Features
+🛡️ 3. THE INNOVATION — LIFELINE-FIRST ROUTING
 
-3.1 Neighbourhood Energy Command Centre
+PEOPLE BEFORE PRICE.
 
-- Interactive energy dashboard.
-- Neighbourhood supply and demand overview.
-- Solar generation and consumption indicators.
-- Battery and reserve visibility.
-- Energy availability and grid status.
-- Live-style operational metrics using simulated data.
+This is EcoPulse's defining innovation.
 
-3.2 3D Neighbourhood Energy Visualisation
+Conventional energy optimisation primarily focuses on supply, demand and cost.
 
-- Interactive Three.js energy globe.
-- Visual representation of neighbourhood energy nodes.
-- Animated connections between energy points.
-- Fallback visualisation for devices where 3D rendering is unavailable.
+EcoPulse introduces a protected reserve requirement for households that voluntarily opt into critical energy prioritisation.
 
-3.3 Energy Flow Intelligence
+How it works
 
-- Visual energy flow representation.
-- 24-hour timeline control.
-- Supply and demand changes across simulated time.
-- Neighbourhood-level energy distribution insights.
-- Identification of surplus and shortage conditions.
+1. A household voluntarily enables Lifeline priority.
+2. The system identifies its protected energy reserve requirement.
+3. The optimiser considers this requirement before allocating energy for trading.
+4. Remaining eligible surplus can be matched with neighbourhood demand.
+5. During an outage scenario, local backup resources are prioritised for essential loads.
 
-3.4 AI Energy Advisor
+Our differentiator: Social priority becomes a hard constraint in energy allocation — not just another pricing preference.
 
-- Natural-language energy queries.
-- AI-generated energy recommendations through the Groq API.
-- Context-aware suggestions based on the dashboard's simulated energy conditions.
-- Fallback responses when the external AI service is unavailable.
+---
 
-3.5 Peer-to-Peer Energy Marketplace
+🚀 4. KEY FEATURES
 
-- Simulated local energy offers and demand.
-- Visual matching of surplus energy with neighbourhood demand.
-- Illustrative energy trade records.
-- Local transaction and settlement interface.
+⚡ Intelligent Energy Command Centre
 
-3.6 Lifeline-First Protection
+- Neighbourhood energy dashboard.
+- Supply and demand indicators.
+- Solar generation and consumption visibility.
+- Battery reserve information.
+- Energy performance metrics.
 
-- Critical household reserve concept.
-- Protected energy allocation.
-- Priority-based energy distribution.
-- Emergency reserve visibility.
+🌐 Interactive 3D Energy Network
 
-3.7 Smart Outage Shield
+- Three.js-powered energy globe.
+- Visual neighbourhood energy nodes.
+- Animated energy connections.
+- Interactive energy network representation.
+- Fallback visualisation for devices without 3D support.
 
-- Simulated central grid outage scenarios.
-- Local battery reserve visualisation.
-- Neighbourhood islanding concept.
-- Critical-load protection demonstration.
+📈 24-Hour Energy Intelligence
 
-3.8 Scenario Simulator
+- Interactive daily timeline.
+- Simulated supply and demand changes.
+- Energy availability insights.
+- Neighbourhood-level performance indicators.
 
-Explore different operating conditions:
+🤖 AI Energy Advisor
 
-Scenario| What it demonstrates
-Normal| Standard neighbourhood energy conditions
+- Natural-language energy questions.
+- Groq-powered AI recommendations.
+- Context-aware dashboard assistance.
+- Local fallback behaviour when the AI service is unavailable.
+
+🔄 Peer-to-Peer Energy Marketplace
+
+- Simulated energy offers.
+- Local demand matching.
+- Surplus energy representation.
+- Illustrative trade ledger.
+
+🏥 Lifeline-First Protection
+
+- Protected reserve concept.
+- Critical household prioritisation.
+- Priority-aware allocation.
+- Essential-load protection demonstration.
+
+🔋 Smart Outage Shield
+
+- Grid outage simulation.
+- Local battery reserve representation.
+- Emergency energy allocation concept.
+- Neighbourhood resilience demonstration.
+
+🌦️ Scenario Simulator
+
+Scenario| Simulation
+Normal| Standard energy conditions
 Cloud Cover| Reduced solar generation
-Peak Demand| Increased electricity consumption
-Grid Outage| Emergency backup and reserve prioritisation
+Peak Demand| Increased consumption
+Grid Outage| Backup energy prioritisation
 
-3.9 Analytics and Impact
+📊 Energy Analytics
 
-- Energy performance indicators.
-- Supply and demand visualisation.
+- Performance indicators.
+- Supply and demand insights.
 - Estimated cost and efficiency impact.
-- Operational insights for neighbourhood energy coordination.
+- Operational dashboard visualisation.
 
-3.10 Mobile-Friendly Experience
+📱 Responsive PWA Experience
 
-- Responsive dashboard.
-- Mobile-friendly navigation and controls.
-- Progressive Web App foundations.
-- Installable experience where supported by the browser.
+- Mobile-friendly dashboard.
+- Responsive layout.
+- Web App Manifest.
+- Service Worker caching foundations.
 
 ---
 
-🧠 4. How EcoPulse Works
+🧠 5. HOW ECOPULSE WORKS
 
-EcoPulse follows a five-stage neighbourhood energy coordination workflow.
+Five stages of intelligent energy coordination.
 
 flowchart TD
-    A["Neighbourhood Energy Inputs"] --> B["Energy Forecasting"]
-    B --> C["Supply and Demand Analysis"]
-    C --> D["Peer-to-Peer Energy Matching"]
-    D --> E["Lifeline-First Reserve Check"]
-    E --> F["Energy Routing and Allocation"]
-    F --> G["Dashboard and Energy Insights"]
-    H["Grid Outage Detection"] --> I["Outage Shield"]
+    A["Smart Energy Inputs"] --> B["24-Hour Forecasting"]
+    B --> C["Supply & Demand Analysis"]
+    C --> D["P2P Energy Matching"]
+    D --> E["Lifeline Reserve Check"]
+    E --> F["Energy Allocation"]
+    F --> G["Live Dashboard Insights"]
+
+    H["Grid Outage"] --> I["Smart Outage Shield"]
     I --> J["Local Battery Reserve"]
     J --> E
 
 Stage 1 — Energy Data Collection
 
-Energy generation, consumption and battery conditions are represented through simulated neighbourhood meter data.
+Simulated energy inputs represent household solar generation, electricity consumption and battery availability.
 
-Stage 2 — Energy Forecasting
+Stage 2 — Forecasting
 
-The forecasting layer analyses expected energy supply and demand across a 24-hour period.
-
-The proposed full-scale system uses a PyTorch-based LSTM forecasting model.
+The proposed production forecasting engine uses a PyTorch LSTM model to predict energy supply and demand over 24 hours.
 
 Stage 3 — Intelligent Matching
 
-Surplus energy is compared with nearby consumer demand to identify potential local energy matches.
+The proposed optimisation engine uses Mixed-Integer Linear Programming to match available energy with neighbourhood demand.
 
-The proposed optimisation engine uses Mixed-Integer Linear Programming (MILP).
+Stage 4 — Lifeline Protection
 
-Stage 4 — Lifeline-First Allocation
+The protected reserve requirement is considered before surplus energy becomes available for trading.
 
-Before energy is made available for trading, the system checks the protected reserve requirement for opted-in critical households.
+Stage 5 — Monitoring
 
-Stage 5 — Monitoring and Protection
-
-The dashboard displays energy conditions, routing information and scenario outcomes. During an outage simulation, the Outage Shield demonstrates the prioritisation of local backup resources.
+The dashboard visualises energy conditions, marketplace activity, scenarios and operational insights.
 
 ---
 
-🛡️ 5. What Makes EcoPulse Different?
-
-Capability| Traditional Grid Approach| EcoPulse Approach
-Energy distribution| Centralised distribution| Neighbourhood-level P2P coordination concept
-Energy forecasting| Historical consumption patterns| Proposed AI-based 24-hour forecasting
-Solar utilisation| Conventional grid export| Local surplus matching
-Energy optimisation| Cost and demand focused| Supply, demand and social priority
-Emergency response| Dependence on grid restoration| Local backup and reserve prioritisation concept
-Visibility| Limited neighbourhood-level insights| Interactive energy command centre
-
-Our key differentiator
-
-Social priority becomes a hard constraint in energy allocation.
-
-EcoPulse does not simply ask where electricity can generate the highest return. It also asks where electricity is most essential.
-
----
-
-🏗️ 6. System Architecture
+🏗️ 6. SYSTEM ARCHITECTURE
 
 Current prototype architecture
 
-The current demonstration is designed to run as a lightweight web application.
+The current prototype is a lightweight web application with a simulated energy environment and serverless AI endpoint.
 
 flowchart TD
     U["User"] --> UI["EcoPulse Web Dashboard"]
-    UI --> V["Visualisation and Simulation Layer"]
-    V --> T["Three.js Energy Visualisation"]
-    V --> S["Scenario and Energy Simulation"]
+    UI --> V["Dashboard and Simulation"]
+    V --> T["Three.js Visualisation"]
+    V --> S["Energy Scenario Engine"]
+    S --> D["Energy Metrics"]
     UI --> API["Vercel Serverless API"]
-    API --> AI["Groq AI API"]
-    AI --> API
+    API --> G["Groq AI API"]
+    G --> API
     API --> UI
-    S --> D["Dashboard Metrics and Insights"]
 
 Proposed production architecture
 
-The following architecture represents the planned full-scale implementation.
-
 flowchart TD
-    A["Smart Energy Meters"] --> B["MQTT Data Ingestion"]
+    A["Smart Meters"] --> B["MQTT Telemetry"]
     B --> C["FastAPI Backend"]
-    C --> D["PyTorch LSTM Forecasting"]
-    D --> E["Energy Supply and Demand Prediction"]
-    E --> F["OR-Tools MILP Optimisation"]
-    F --> G["Lifeline-First Reserve Constraint"]
+    C --> D["PyTorch LSTM"]
+    D --> E["24-Hour Forecast"]
+    E --> F["OR-Tools MILP"]
+    F --> G["Lifeline-First Constraint"]
     G --> H["P2P Energy Routing"]
-    H --> I["Settlement and Transaction Layer"]
+    H --> I["Local Settlement"]
     C --> J["TimescaleDB"]
-    H --> K["WebSocket Updates"]
-    K --> L["EcoPulse Dashboard"]
-    M["Grid Outage Signal"] --> N["Outage Shield"]
+    H --> K["WebSockets"]
+    K --> L["Next.js Dashboard"]
+    M["Grid Failure Signal"] --> N["Outage Shield"]
     N --> G
 
-Architecture philosophy
+Architecture principles
 
-- Forecast before allocation: anticipate demand and supply conditions before routing energy.
-- Optimise locally: prioritise nearby energy generation and consumption.
-- Protect essential loads: enforce the Lifeline reserve before allocating tradable energy.
-- Maintain visibility: make energy conditions understandable through an interactive dashboard.
-- Design for scalability: replicate the microgrid coordination model across neighbourhood transformer clusters.
+- Forecast before allocation.
+- Optimise energy locally.
+- Protect critical household reserves.
+- Make allocation decisions explainable.
+- Design for neighbourhood-level scalability.
+
+The production architecture is a proposed expansion, not a claim that all these integrations are already implemented.
 
 ---
 
-⚙️ 7. Technology Stack
+🧰 7. TECHNOLOGY STACK
 
-Current prototype
+Current prototype technologies
 
 Layer| Technology
 Frontend| HTML5, CSS3, JavaScript
-3D Visualisation| Three.js
-Dashboard| Custom responsive UI
-AI integration| Groq API
-Serverless backend| Vercel Functions
-API runtime| Node.js
-PWA foundation| Web App Manifest, Service Worker
-Version control| Git and GitHub
+3D Graphics| Three.js
+AI Integration| Groq API
+Backend Endpoint| Vercel Serverless Functions
+Runtime| Node.js
+PWA| Web Manifest, Service Worker
+Version Control| Git, GitHub
 Deployment| Vercel
 
-Proposed production stack
+Planned production technologies
 
-Layer| Planned technology
+Layer| Technology
 Frontend| Next.js, Tailwind CSS
-Backend| FastAPI, WebSockets
-Energy telemetry| MQTT
+Backend| FastAPI
+Telemetry| MQTT
 Forecasting| PyTorch LSTM
 Optimisation| Google OR-Tools MILP
-Time-series database| TimescaleDB
+Database| TimescaleDB
 Deployment| Docker, GitHub Actions
-
-The proposed production stack describes the intended expansion. It should not be interpreted as already integrated into the current prototype.
 
 ---
 
-📊 8. Expected Impact
+⚖️ 8. WHY ECOPULSE IS DIFFERENT
 
-Projected targets
+Capability| Traditional Grid| EcoPulse
+Distribution| Centralised| Neighbourhood P2P coordination concept
+Prediction| Historical averages| Proposed AI forecasting
+Solar utilisation| Conventional export| Local surplus matching
+Allocation| Cost and demand focused| Cost, demand and social priority
+Outage response| Dependence on grid restoration| Local reserve protection concept
 
-Impact indicator| Target
+The real innovation
+
+We do not optimise electricity distribution for price alone. We optimise it with people in mind.
+
+---
+
+📊 9. EXPECTED IMPACT
+
+Three projected targets
+
+Metric| Projected target
 Monthly electricity cost reduction| 28%
 Clean energy utilisation improvement| 18%
 Automated blackout resilience| 100% target
 
-These are projected design targets, not measured results or verified performance benchmarks.
+<sub>These are proposed targets from the idea submission, not measured or independently validated prototype results.</sub>
 
-Environmental impact
+Environmental benefits
 
-- Better utilisation of locally generated renewable energy.
-- Reduced dependence on conventional peak-hour electricity.
-- More efficient neighbourhood energy coordination.
-- Support for decentralised renewable energy adoption.
+- Better use of rooftop renewable energy.
+- Improved local energy utilisation.
+- Reduced reliance on conventional peak-hour electricity.
 
-Social impact
+Social benefits
 
-- Protected energy reserves for opted-in critical households.
-- Improved resilience during grid interruptions.
+- Priority for opted-in critical households.
+- Improved energy resilience.
 - More inclusive energy allocation.
-- Greater neighbourhood energy awareness.
 
-Economic impact
+Economic benefits
 
 - Potential savings through local energy matching.
-- Additional value from surplus rooftop solar.
-- Reduced peak demand pressure on local infrastructure.
+- Better use of surplus solar generation.
+- Reduced evening demand pressure.
 
 ---
 
-🔐 9. Privacy, Safety and Responsible Design
+🎬 10. DEMO WALKTHROUGH
 
-EcoPulse follows a people-first approach to energy management.
+Explore the EcoPulse prototype
 
-- Opt-in priority: critical households voluntarily enable Lifeline priority.
-- Data minimisation: the proposed system stores a priority flag rather than a medical diagnosis.
-- Protected reserves: essential energy reserves are considered before tradable surplus.
-- Transparent allocation: energy recommendations and allocation decisions should be explainable.
-- Human-centred design: real deployments must include appropriate safety controls and utility oversight.
-- Simulation transparency: the current prototype uses simulated energy data and does not control real electricity infrastructure.
+<p align="center">
+  <a href="YOUR_VERCEL_DEMO_URL">
+    <img src="https://img.shields.io/badge/OPEN_LIVE_DEMO-00C853?style=for-the-badge&logo=vercel&logoColor=white" alt="Open Live Demo">
+  </a>
+</p>Recommended demo sequence
+
+Step| What to explore
+01| Open the Energy Command Centre
+02| Explore the 3D neighbourhood energy network
+03| Adjust the 24-hour timeline
+04| Inspect the energy marketplace
+05| Explore Lifeline-First reserve prioritisation
+06| Test Normal, Cloud Cover, Peak Demand and Grid Outage scenarios
+07| Ask questions using the AI Energy Advisor
+08| Explore the Outage Shield
+
+Demo note: The current prototype demonstrates simulated energy conditions and interactions. It does not execute real electricity trades or operate physical grid equipment.
 
 ---
 
-🖥️ 10. Run Locally
+💻 11. RUN LOCALLY
 
-Prerequisites
+Requirements
 
-- A modern browser (Chrome, Edge or Firefox).
+- Modern web browser.
 - Git.
-- A code editor, such as VS Code.
-- Optional: a Groq API key for the live AI Advisor.
+- Python 3.
+- Optional Groq API key for AI functionality.
 
 Clone the repository
 
 git clone https://github.com/madhumitha9971-pixel/EcoPulse.git
+
 cd EcoPulse
 
-Run the project
-
-For the static frontend, you can use a local development server.
+Start a local server
 
 python -m http.server 8000
 
@@ -357,195 +423,152 @@ Open:
 
 http://localhost:8000
 
-You can also open "index.html" directly for basic frontend inspection, but using a local server is recommended for service-worker and PWA testing.
+AI configuration
 
-Configure the AI Advisor
-
-The AI Advisor uses a server-side API endpoint.
-
-Create a Vercel environment variable:
-
-Variable| Description
-"GROQ_API_KEY"| Your private Groq API key
-
-Important security rules:
-
-- Never put your API key inside "index.html".
-- Never commit secret keys to GitHub.
-- Keep the key in Vercel Environment Variables.
-- Redeploy after changing environment variables.
-
-The frontend communicates with the serverless endpoint:
+The AI Advisor communicates with the serverless endpoint:
 
 /api/ai
 
-If the AI service is unavailable, the application can use its local fallback behaviour.
+Configure the following secret in Vercel:
+
+Environment variable| Purpose
+"GROQ_API_KEY"| Private Groq API credential
+
+Security: Never expose API keys in frontend JavaScript or commit them to GitHub.
 
 ---
 
-☁️ 11. Deployment
+☁️ 12. DEPLOYMENT
 
-EcoPulse is designed for deployment through Vercel.
+EcoPulse uses Vercel for hosting.
 
-Deployment workflow
+Deployment steps
 
-1. Push the project files to GitHub.
-2. Import the EcoPulse repository into Vercel.
-3. Configure the project root and deployment settings.
-4. Add "GROQ_API_KEY" under Environment Variables if AI functionality is required.
-5. Deploy the project.
-6. Test the dashboard, scenario controls and AI Advisor.
+1. Push the source code to GitHub.
+2. Import the repository into Vercel.
+3. Configure the project root.
+4. Add the "GROQ_API_KEY" environment variable.
+5. Deploy the application.
+6. Test the dashboard and AI endpoint.
 
-Deployment configuration
-
-Setting| Value
-Framework preset| Other
+Configuration| Value
+Framework| Other
 Root directory| Repository root
 Build command| Leave blank
 Output directory| "."
-AI environment variable| "GROQ_API_KEY"
+Environment variable| "GROQ_API_KEY"
 
-Deployment settings may need adjustment if the repository structure or Vercel configuration changes.
-
----
-
-🧪 12. Demo Walkthrough
-
-Explore EcoPulse in a few minutes
-
-1. Open the Energy Command Centre
-
-Explore the neighbourhood dashboard and inspect the simulated energy indicators.
-
-2. Explore the 3D Energy Network
-
-Interact with the visual energy globe and observe the neighbourhood energy representation.
-
-3. Adjust the 24-Hour Timeline
-
-Move through the simulated day to inspect changes in supply and demand.
-
-4. Explore the P2P Marketplace
-
-Inspect the simulated energy offers, demand matching and transaction ledger.
-
-5. Test Lifeline-First Protection
-
-Explore the reserve prioritisation concept and understand how critical household energy needs are considered before trading.
-
-6. Activate Scenario Simulation
-
-Switch between normal, cloud cover, peak demand and grid outage conditions.
-
-7. Try the AI Energy Advisor
-
-Ask an energy-related question and explore the AI-generated recommendations.
-
-8. Explore the Outage Shield
-
-Observe how the system demonstrates neighbourhood backup and critical-load prioritisation during an outage scenario.
+Redeploy after changing environment variables.
 
 ---
 
-🤖 13. AI Tools and Development Transparency
+🔐 13. PRIVACY AND RESPONSIBLE DESIGN
 
-EcoPulse uses AI as part of its energy intelligence experience.
+EcoPulse is designed around responsible energy prioritisation.
 
-Runtime AI
-
-Technology| Purpose
-Groq API| AI-powered energy advisory
-Local simulation logic| Energy scenario calculations and dashboard behaviour
-Three.js| Interactive 3D energy visualisation
-
-Development tools
-
-The project uses web development tools and AI-assisted workflows where applicable. All external libraries and AI services should be acknowledged accurately in the final submission.
-
-The current prototype does not yet contain a trained LSTM forecasting model or a production MILP optimisation engine.
+- Opt-in priority: households voluntarily enable Lifeline priority.
+- Data minimisation: the proposed design stores a priority flag, not a medical diagnosis.
+- Protected reserves: essential energy needs are considered before tradable surplus.
+- Transparent decisions: energy allocation should be explainable.
+- Safety-first deployment: real grid integration requires utility approval and certified electrical protection.
+- Simulation transparency: the prototype uses simulated energy data and does not control real infrastructure.
 
 ---
 
-⚠️ 14. Limitations and Future Work
+🚧 14. LIMITATIONS AND FUTURE ROADMAP
 
 Current limitations
 
-- The prototype uses simulated energy data rather than physical smart-meter feeds.
-- The energy marketplace demonstrates simulated matching and transactions, not real electricity trading.
-- The current dashboard does not control real batteries, inverters or grid infrastructure.
-- The AI Advisor provides recommendations, not certified electrical engineering decisions.
-- The 28%, 18% and 100% impact values are projected targets, not measured results.
-- Real-world islanding requires utility-approved protection equipment and electrical safety systems.
-- Actual P2P settlement requires regulatory approval and integration with authorised energy providers.
+- Energy inputs are simulated rather than collected from physical smart meters.
+- The current prototype does not operate a trained LSTM forecasting model.
+- Production MILP optimisation is planned, not yet integrated.
+- Marketplace trades are illustrative, not real electricity transactions.
+- Outage protection is a simulation, not physical islanding control.
+- Impact percentages are projected targets rather than measured outcomes.
 
 Future roadmap
 
-Phase 1 — Intelligent Energy Simulation
+Phase 1 — Intelligent Simulation
 
-- Improve the neighbourhood energy simulation.
+- Improve energy simulation accuracy.
 - Validate supply and demand calculations.
-- Strengthen Lifeline reserve allocation.
-- Test multiple outage and peak-demand scenarios.
+- Strengthen reserve allocation.
+- Expand scenario testing.
 
-Phase 2 — AI Forecasting and Optimisation
+Phase 2 — AI Forecasting
 
-- Integrate a PyTorch LSTM model.
-- Implement OR-Tools MILP energy matching.
-- Add explainable allocation decisions.
-- Evaluate performance using realistic energy datasets.
+- Integrate PyTorch LSTM.
+- Build OR-Tools optimisation.
+- Introduce explainable allocation.
+- Evaluate using realistic energy datasets.
 
 Phase 3 — Smart Meter Integration
 
-- Integrate MQTT-based meter telemetry.
-- Connect battery and inverter data.
-- Add real-time energy monitoring.
-- Introduce secure household and neighbourhood authentication.
+- MQTT telemetry.
+- Battery and inverter data.
+- Real-time energy monitoring.
+- Secure household authentication.
 
-Phase 4 — Real-World Microgrid Deployment
+Phase 4 — Real-World Deployment
 
-- Partner with authorised utilities.
-- Validate local energy-sharing regulations.
-- Test controlled microgrid operation.
-- Establish safety-certified outage protection.
+- Utility partnerships.
+- Regulatory validation.
+- Certified outage protection.
+- Neighbourhood microgrid pilots.
 
 ---
 
-📁 15. Repository Structure
+📁 15. REPOSITORY STRUCTURE
 
 EcoPulse/
 │
-├── index.html          # Main dashboard and application interface
-├── manifest.json       # Progressive Web App configuration
-├── sw.js               # Service worker and caching
-├── icon.svg            # Application icon
+├── index.html
+│   └── Main dashboard and application interface
+│
+├── manifest.json
+│   └── PWA configuration
+│
+├── sw.js
+│   └── Service worker and caching
+│
+├── icon.svg
+│   └── Application icon
 │
 ├── api/
-│   └── ai.js           # Serverless AI Advisor endpoint
+│   └── ai.js
+│       └── Serverless AI Advisor endpoint
 │
-└── README.md           # Project documentation
-
-This structure describes the current lightweight prototype. Additional backend, forecasting, optimisation and database modules can be added as the project expands.
-
----
-
-👥 Team
-
-Team: Team Innovexa
-
-Project: EcoPulse
-
-Competition: CODEQUEST 2026
-
-Team ID: madhumitha9971
+└── README.md
+    └── Project documentation
 
 ---
 
-⚡ Our Vision
+👥 16. TEAM INNOVEXA
 
-We believe the future of energy is not only about generating more electricity. It is about distributing available energy intelligently, using renewable resources efficiently and protecting the people who need electricity the most.
+<p align="center">
+  <strong>TEAM INNOVEXA</strong>
+</p>Detail| Information
+Project| EcoPulse
+Competition| CODEQUEST 2026
+Team ID| madhumitha9971
+Repository| GitHub — EcoPulse
+
+---
+
+🌱 OUR FINAL VISION
+
+We believe the future of energy is not simply about generating more electricity.
+
+It is about using energy intelligently, sharing it fairly and protecting the people who depend on it.
 
 EcoPulse transforms neighbourhoods from passive electricity consumers into coordinated energy communities.
 
-Forecast. Route. Protect.
+<p align="center">
+  <strong>⚡ FORECAST. ROUTE. PROTECT.</strong>
+</p><p align="center">
+  <strong>TRADE FAIRLY. PROTECT FIRST. POWER EVERY NEIGHBOURHOOD.</strong>
+</p>---
 
-Trade fairly. Protect first. Power every neighbourhood.
+<p align="center">
+  Built with innovation by <strong>Team Innovexa</strong>
+</p>
