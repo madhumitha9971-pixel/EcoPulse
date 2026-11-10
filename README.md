@@ -3,10 +3,17 @@ EcoPulse
 > Forecast. Route. Protect.
 > 
 Turning wasted rooftop solar into neighbourhood power — while protecting the people who need electricity most.
+Live Demo: ecopulse-neighbourhood-grid.vercel.app
+👥 Team & Competition Details
+ * Team Name: Team Innovexa
+ * Author / Lead Developer: D. Madhumitha
+ * AI Core Engine: Groq API (llama3-70b-8192)
+ * Competition: CODEQUEST 2026
+ * Repository: madhumitha9971-pixel/EcoPulse
+We split the codebase into a lightweight PWA setup: Client Dashboard & 3D Visualization (index.html), Serverless AI Gateway (api/ai.js), and Service Worker Offline Cache (sw.js).
 🌍 The Vision
 What if your neighbourhood could generate, share, and protect its own electricity?
-Every afternoon, rooftop solar panels generate more electricity than some households can consume. Every evening, the same neighbourhood experiences peak demand and higher electricity costs. Meanwhile, households that depend on electricity for essential medical equipment can face serious risks during unexpected power failures.
-The problem is not just electricity generation. It is how intelligently we distribute, prioritise, and protect the energy we already have.
+Every afternoon, rooftop solar panels generate more electricity than some households can consume. Every evening, the same neighbourhood experiences peak demand and higher electricity costs. Meanwhile, households that depend on electricity for essential medical equipment face serious risks during unexpected power failures.
 EcoPulse introduces a neighbourhood-level intelligent energy coordination platform that forecasts demand, routes surplus renewable energy, and prioritises critical household reserves.
 > Our Promise: Trade fairly. Protect first. Power every neighbourhood.
 > 
@@ -26,7 +33,6 @@ EcoPulse introduces a neighbourhood-level intelligent energy coordination platfo
  * Privacy and Responsible Design
  * Limitations and Future Roadmap
  * Repository Structure
- * Team
 🔴 1. The Problem
 Three energy problems. One neighbourhood.
 | Problem | What Happens |
@@ -41,15 +47,12 @@ Target Users
  * Vulnerable Households dependent on essential powered medical equipment.
  * EV Charging Stations seeking localized clean power.
  * Local Utilities managing peak grid demand.
-> The Opportunity: Connect individual energy resources into an intelligent neighbourhood network.
-> 
 💡 2. Our Solution
 EcoPulse is an AI-powered neighbourhood energy intelligence platform combining energy forecasting, peer-to-peer (P2P) coordination, intelligent allocation, and emergency reserve prioritisation.
 Core Capabilities
  * 24-Hour AI Energy Forecast: Predicts expected neighbourhood energy supply and demand to identify potential shortages, surplus generation, and consumption peaks.
  * Automated Peer-to-Peer Energy Routing: Coordinates surplus energy with nearby demand, making optimal use of locally generated renewable electricity.
  * Smart Outage Shield: Demonstrates how local battery resources can be dynamically prioritised during a central grid failure.
-The Result: A neighbourhood energy network designed around three priorities — Efficiency, Fairness, and Human Safety.
 🛡️ 3. The Innovation — Lifeline-First Routing
 > PEOPLE BEFORE PRICE.
 > This is EcoPulse's defining innovation.
@@ -65,12 +68,12 @@ How It Works
 > 
 🚀 4. Key Features
  * ⚡ Intelligent Energy Command Centre: Live neighbourhood energy dashboard displaying supply/demand indicators, solar generation, consumption visibility, and battery reserves.
- * 🌐 Interactive 3D Energy Network: Three.js-powered visual network featuring neighbourhood energy nodes and animated connections (with dynamic visual fallbacks).
- * 📈 24-Hour Energy Intelligence: Interactive daily timeline detailing simulated supply and demand shifts and energy availability insights.
- * 🤖 AI Energy Advisor: Natural-language assistant powered by Groq for context-aware recommendations and local fallback behavior.
+ * 🌐 Interactive 3D Energy Network: Three.js-powered visual network featuring neighbourhood energy nodes and animated connections.
+ * 📈 24-Hour Energy Intelligence: Interactive daily timeline detailing simulated supply and demand shifts.
+ * 🤖 AI Energy Advisor: Natural-language assistant powered by Groq (llama3-70b-8192) for context-aware recommendations.
  * 🔄 Peer-to-Peer Energy Marketplace: Simulated energy offers, local demand matching, and illustrative trade ledgers.
  * 🏥 Lifeline-First Protection: Priority-aware reserve allocation ensuring essential-load protection.
- * 🔋 Smart Outage Shield: Simulated grid blackout triggers with local battery reserve visualisations for neighbourhood resilience.
+ * 🔋 Smart Outage Shield: Simulated grid blackout triggers with local battery reserve visualisations.
  * 🌦️ Scenario Simulator: Instant testing for Normal, Cloud Cover, Peak Demand, and Grid Outage environments.
  * 📱 Responsive PWA Experience: Mobile-first layout backed by Web App Manifest and Service Worker caching foundations.
 🧠 5. How EcoPulse Works
@@ -99,39 +102,17 @@ flowchart TD
     V --> S["Energy Scenario Engine"]
     S --> D["Energy Metrics"]
     UI --> API["Vercel Serverless API"]
-    API --> G["Groq AI API"]
+    API --> G["Groq AI API (Llama3-70B)"]
     G --> API
     API --> UI
-
-Proposed Production Architecture
-flowchart TD
-    A["Smart Meters"] --> B["MQTT Telemetry"]
-    B --> C["FastAPI Backend"]
-    C --> D["PyTorch LSTM"]
-    D --> E["24-Hour Forecast"]
-    E --> F["OR-Tools MILP"]
-    F --> G["Lifeline-First Constraint"]
-    G --> H["P2P Energy Routing"]
-    H --> I["Local Settlement"]
-    C --> J["TimescaleDB"]
-    H --> K["WebSockets"]
-    K --> L["Next.js Dashboard"]
-    M["Grid Failure Signal"] --> N["Outage Shield"]
-    N --> G
 
 🧰 7. Technology Stack
 Current Prototype
  * Frontend: HTML5, CSS3, JavaScript (ES6+)
- * 3D Visualisation: Three.js
- * AI Engine: Groq API via Vercel Serverless Functions
+ * 3D Visualisation: Three.js (r160)
+ * AI Engine: Groq API (llama3-70b-8192) via Vercel Serverless Functions
  * Application Type: Progressive Web App (PWA)
- * Version Control & Hosting: Git, GitHub, Vercel
-Planned Production Expansion
- * Frontend Framework: Next.js, Tailwind CSS
- * Backend API: FastAPI (Python)
- * Telemetry & Storage: MQTT, TimescaleDB
- * Machine Learning & Optimisation: PyTorch (LSTM), Google OR-Tools (MILP)
- * Deployment & CI/CD: Docker, GitHub Actions
+ * Hosting & Deployment: GitHub, Vercel
 ⚖️ 8. Why EcoPulse is Different
 | Capability | Traditional Grid | EcoPulse |
 |---|---|---|
@@ -153,41 +134,35 @@ Recommended Sequence
  * Test the Lifeline-First Reserve Prioritisation.
  * Switch through Normal, Cloud Cover, Peak Demand, and Grid Outage scenarios.
  * Interact with the AI Energy Advisor.
-> Note: The current prototype demonstrates simulated energy conditions and interactions. It does not execute real physical grid equipment operations.
-> 
 💻 11. Run Locally
 Prerequisites
- * Modern web browser (Chrome, Edge, Firefox, Safari)
+ * Modern web browser
  * Git
- * Python 3.x (for local static server hosting)
-Installation Steps
- * Clone the Repository:
-   git clone https://github.com/madhumitha9971-pixel/EcoPulse.git
+ * Python 3.x (for static server hosting)
+Quick Start
+# Clone the repository
+git clone https://github.com/madhumitha9971-pixel/EcoPulse.git
 cd EcoPulse
 
- * Start Local Server:
-   python -m http.server 8000
+# Start local server
+python -m http.server 8000
 
- * Access Application:
-   Navigate to http://localhost:8000 in your browser.
+Open http://localhost:8000 in your browser.
 ☁️ 12. Deployment
-EcoPulse is optimized for single-click deployment on Vercel.
- * Push your repository updates to GitHub.
- * Import the repository into your Vercel Dashboard.
- * Configure the Root Directory as /.
- * Add your GROQ_API_KEY under Environment Variables.
- * Click Deploy.
+EcoPulse uses Vercel for hosting.
+ * Push your changes to GitHub.
+ * Import the repository into Vercel.
+ * Add the GROQ_API_KEY environment variable in Vercel settings.
+ * Deploy the application.
 🔐 13. Privacy and Responsible Design
  * Opt-in Priority: Lifeline-First status is strictly opt-in and controlled by the household.
  * Data Minimisation: System logs priority flags only — no confidential personal or medical data is stored.
  * Transparent Logic: Energy matching algorithms prioritize safety rules over market bidding.
- * Safety & Compliance: Physical grid integration requires regulatory approval, smart meter compliance, and certified islanding protection.
 🚧 14. Limitations and Future Roadmap
-Current Limitations
+Limitations
  * Energy inputs are generated via simulation algorithms rather than live smart meters.
  * Machine Learning (LSTM) and MILP solvers are conceptualized frameworks for production transition.
- * Outage protection demonstrates logic isolation rather than physical microgrid islanding.
-Future Roadmap
+Roadmap
  * Phase 1 — Advanced Simulation: Enhanced dataset precision and multi-node scenarios.
  * Phase 2 — AI Pipeline Integration: Live PyTorch LSTM models and Google OR-Tools integration.
  * Phase 3 — Hardware Integration: Smart meter MQTT telemetry integration.
@@ -199,17 +174,12 @@ EcoPulse/
 ├── sw.js             # Service worker script and caching rules
 ├── icon.svg          # Vector application logo
 ├── api/
-│   └── ai.js         # Serverless endpoint for AI Advisor
+│   └── ai.js         # Serverless endpoint for Groq AI Advisor
 └── README.md         # Project documentation
 
-👥 16. Team Innovexa
- * Team Name: Team Innovexa
- * Project: EcoPulse
- * Competition: CODEQUEST 2026
- * Repository: GitHub — EcoPulse
 <div align="center">
 <b>Trade Fairly. Protect First. Power Every Neighbourhood.</b>
 
 
-<i>Built with passion by Team Innovexa</i>
+<i>Built with innovation by Team Innovexa</i>
 </div>
