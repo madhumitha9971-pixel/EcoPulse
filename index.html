@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+6<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -863,4 +863,101 @@ if("serviceWorker" in navigator && location.protocol.startsWith("http")){
 }
 </script>
 </body>
+<!-- ROUND 3 ENHANCEMENT: LIVE LIFELINE SOLVER, P2P LEDGER & AUDIT LOG -->
+<script src="js/engine-v3.js"></script>
+<section id="ecopulse-r3-panel" style="max-width:1200px;margin:24px auto;padding:20px;background:rgba(15,23,42,0.95);border:1px solid rgba(16,185,129,0.35);border-radius:16px;color:#f8fafc;font-family:system-ui,-apple-system,sans-serif;box-shadow:0 20px 40px rgba(0,0,0,0.5);">
+  <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px;border-bottom:1px solid #1e293b;padding-bottom:16px;margin-bottom:20px;">
+    <div>
+      <span style="background:#064e3b;color:#34d399;padding:4px 10px;border-radius:999px;font-size:12px;font-weight:700;letter-spacing:0.5px;">● ROUND 3 LIVE ENGINE</span>
+      <h2 style="margin:8px 0 4px;font-size:20px;color:#fff;">Lifeline-First Optimization &amp; Live P2P Clearing</h2>
+      <p id="r3-weather-badge" style="margin:0;font-size:13px;color:#94a3b8;">Syncing live solar irradiance telemetry...</p>
+    </div>
+    <div style="display:flex;flex-wrap:wrap;gap:8px;">
+      <button onclick="updateR3Scenario('NORMAL')" style="padding:8px 14px;border-radius:8px;border:1px solid #10b981;background:#065f46;color:#fff;font-weight:600;cursor:pointer;">☀️ Normal</button>
+      <button onclick="updateR3Scenario('CLOUD_COVER')" style="padding:8px 14px;border-radius:8px;border:1px solid #38bdf8;background:#0c4a6e;color:#fff;font-weight:600;cursor:pointer;">☁️ Cloud Cover</button>
+      <button onclick="updateR3Scenario('PEAK_DEMAND')" style="padding:8px 14px;border-radius:8px;border:1px solid #f59e0b;background:#78350f;color:#fff;font-weight:600;cursor:pointer;">⚡ Peak Demand</button>
+      <button onclick="updateR3Scenario('GRID_OUTAGE')" style="padding:8px 14px;border-radius:8px;border:1px solid #ef4444;background:#7f1d1d;color:#fff;font-weight:600;cursor:pointer;">🚨 Grid Outage Shield</button>
+    </div>
+  </div>
+
+  <!-- Live KPI Strip -->
+  <div id="r3-kpis" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-bottom:20px;"></div>
+
+  <!-- Interactive Nodes Table (Toggle Lifeline Priority Live!) -->
+  <div style="overflow-x:auto;margin-bottom:20px;background:#0f172a;border-radius:12px;border:1px solid #1e293b;padding:12px;">
+    <h3 style="margin:0 0 10px;font-size:15px;color:#38bdf8;">🏥 Neighbourhood Nodes — Click Button to Toggle Lifeline Reserve Lock</h3>
+    <table style="width:100%;border-collapse:collapse;font-size:13px;text-align:left;">
+      <thead>
+        <tr style="border-bottom:1px solid #334155;color:#94a3b8;">
+          <th style="padding:8px;">Node</th>
+          <th style="padding:8px;">Solar / Load</th>
+          <th style="padding:8px;">Battery SoC</th>
+          <th style="padding:8px;">Locked Reserve</th>
+          <th style="padding:8px;">P2P Export</th>
+          <th style="padding:8px;">Social Priority Action</th>
+        </tr>
+      </thead>
+      <tbody id="r3-nodes-body"></tbody>
+    </table>
+  </div>
+
+  <!-- Two Columns: Live P2P Trade Ledger & Explainable AI Audit Log -->
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px;">
+    <div style="background:#0f172a;border:1px solid #1e293b;border-radius:12px;padding:14px;">
+      <h3 style="margin:0 0 10px;font-size:15px;color:#34d399;">🔄 Automated P2P Clearing Ledger</h3>
+      <div id="r3-trades" style="font-size:12px;color:#cbd5e1;line-height:1.6;"></div>
+    </div>
+    <div style="background:#0f172a;border:1px solid #1e293b;border-radius:12px;padding:14px;">
+      <h3 style="margin:0 0 10px;font-size:15px;color:#fbbf24;">🧠 Explainable AI Grid Decision Audit Log</h3>
+      <div id="r3-logs" style="font-family:monospace;font-size:12px;color:#a7f3d0;max-height:170px;overflow-y:auto;line-height:1.5;"></div>
+    </div>
+  </div>
+</section>
+
+<script>
+  function renderR3Dashboard(data) {
+    if (!data) return;
+    document.getElementById('r3-weather-badge').innerText =
+      `${data.isLiveWeather ? '🟢 LIVE SATELLITE TELEMETRY' : '🟡 CALIBRATED TELEMETRY'} • ${data.city} Irradiance: ${data.liveIrradianceWm2} W/m² • Active Mode: ${data.scenario}`;
+
+    const s = data.summary;
+    document.getElementById('r3-kpis').innerHTML = `
+      <div style="background:#1e293b;padding:12px;border-radius:10px;"><div style="font-size:11px;color:#94a3b8;">SOLAR GENERATION</div><div style="font-size:20px;font-weight:700;color:#34d399;">${s.totalGenKw} kW</div></div>
+      <div style="background:#1e293b;padding:12px;border-radius:10px;"><div style="font-size:11px;color:#94a3b8;">NEIGHBOURHOOD DEMAND</div><div style="font-size:20px;font-weight:700;color:#f8fafc;">${s.totalDemandKw} kW</div></div>
+      <div style="background:#1e293b;padding:12px;border-radius:10px;border:1px solid #0284c7;"><div style="font-size:11px;color:#38bdf8;">LIFELINE LOCKED RESERVE</div><div style="font-size:20px;font-weight:700;color:#38bdf8;">${s.totalLockedLifelineKwh} kWh</div></div>
+      <div style="background:#1e293b;padding:12px;border-radius:10px;"><div style="font-size:11px;color:#94a3b8;">P2P CLEARED / SAVINGS</div><div style="font-size:20px;font-weight:700;color:#fbbf24;">${s.clearedP2PKw} kW (₹${s.hourlySavingsINR}/hr)</div></div>
+    `;
+
+    document.getElementById('r3-nodes-body').innerHTML = data.evaluatedNodes.map(n => `
+      <tr style="border-bottom:1px solid #1e293b;">
+        <td style="padding:8px;font-weight:600;">${n.id} • ${n.name}</td>
+        <td style="padding:8px;"><span style="color:#34d399;">+${n.genKw}</span> / <span style="color:#fbbf24;">-${n.demandKw} kW</span></td>
+        <td style="padding:8px;">${n.soc}% (${n.currentStoredKwh} kWh)</td>
+        <td style="padding:8px;color:${n.isLifeline ? '#38bdf8' : '#64748b'};font-weight:600;">${n.isLifeline ? `🔒 ${n.lockedKwh} kWh` : '0.0 kWh'}</td>
+        <td style="padding:8px;color:${n.eligibleExportKw > 0 ? '#34d399' : '#94a3b8'};">${n.reserveProtected ? '🛡️ HELD FOR LIFELINE' : n.eligibleExportKw + ' kW'}</td>
+        <td style="padding:8px;">
+          <button onclick="toggleR3Lifeline('${n.id}')" style="padding:5px 10px;border-radius:6px;border:none;cursor:pointer;font-size:11px;font-weight:700;background:${n.isLifeline ? '#0284c7' : '#334155'};color:#fff;">
+            ${n.isLifeline ? '🏥 Lifeline ON (Tap to Toggle)' : 'Standard (Enable Lifeline)'}
+          </button>
+        </td>
+      </tr>
+    `).join('');
+
+    document.getElementById('r3-trades').innerHTML = data.trades.length
+      ? data.trades.map(t => `<div style="padding:6px 0;border-bottom:1px solid #1e293b;"><strong>${t.from}</strong> → <strong>${t.to}</strong>: <span style="color:#34d399;">${t.kwh} kWh</span> @ ${t.rate} (Saved <strong>${t.saved}</strong>) <span style="color:#38bdf8;">[${t.priority}]</span></div>`).join('')
+      : `<div style="color:#fbbf24;">⚠️ P2P Exports paused: 100% of local battery capacity is prioritizing Lifeline medical reserves.</div>`;
+
+    document.getElementById('r3-logs').innerHTML = data.auditLogs.map(l => `<div style="margin-bottom:6px;">${l}</div>`).join('');
+  }
+
+  function updateR3Scenario(sc) { renderR3Dashboard(EcoPulseV3.setScenario(sc)); }
+  function toggleR3Lifeline(id) { renderR3Dashboard(EcoPulseV3.toggleNodeLifeline(id)); }
+
+  window.addEventListener('DOMContentLoaded', async () => {
+    if (window.EcoPulseV3) {
+      const initial = await EcoPulseV3.syncLiveSolar("Chennai", 13.0827, 80.2707);
+      renderR3Dashboard(initial);
+    }
+  });
+</script>
 </html>
