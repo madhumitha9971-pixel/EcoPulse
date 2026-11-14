@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#07110d">
 <meta name="description" content="EcoPulse — Lifeline-First Neighbourhood Energy Grid">
-<link rel="manifest" href="/manifest.json">
+<link rel="manifest" href="mainfest.json">
 <title>EcoPulse | Lifeline-First Neighbourhood Energy Grid</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -34,22 +34,16 @@ header{height:72px;display:flex;align-items:center;justify-content:space-between
 .live i{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--mint);margin-right:7px}
 
 /* Hero */
-.hero{display:grid;grid-template-columns:1.15fr .85fr;align-items:center;gap:24px;padding:34px 0;border-bottom:1px solid #ffffff18}
+.hero{padding:34px 0;border-bottom:1px solid #ffffff18}
 .eyebrow{font:10px "DM Mono";letter-spacing:2px;color:var(--green);text-transform:uppercase}
 h1{font-size:clamp(32px,4.2vw,54px);line-height:1.08;letter-spacing:-2px;margin:14px 0}
 h1 em{font-style:normal;color:var(--green)}
-.hero p{max-width:580px;color:#b8ccb9;font-size:14px;line-height:1.75}
+.hero p{max-width:720px;color:#b8ccb9;font-size:14px;line-height:1.75}
 .actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
 .btn{border:1px solid transparent;border-radius:10px;padding:12px 16px;font-size:12px;font-weight:800;transition:.15s}
 .primary{background:var(--green);color:#0a1b10}
 .primary:hover{filter:brightness(1.06)}
 .secondary{background:#14271b;color:var(--text);border-color:#456047}
-.heroVisual{height:310px;position:relative}
-#globe{width:100%;height:100%;display:block}
-.float{position:absolute;background:#0b1b12eb;border:1px solid #466348;border-radius:11px;padding:9px 13px}
-.float small{display:block;color:var(--muted);font:8px "DM Mono";letter-spacing:1px}
-.float strong{color:var(--green);font-size:14px}
-.f1{right:2%;top:10%}.f2{left:1%;bottom:14%}.f3{right:4%;bottom:4%}
 
 /* Problem Strip */
 .problemStrip{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:22px 0 30px}
@@ -135,10 +129,9 @@ td{padding:10px 8px;border-bottom:1px solid #1e3526}
 .toast.show{opacity:1}
 
 @media(max-width:900px){
- .hero,.grid,.compareGrid{grid-template-columns:1fr}
+ .grid,.compareGrid{grid-template-columns:1fr}
  .metrics{grid-template-columns:repeat(2,1fr)}
  .problemStrip,.threeCol{grid-template-columns:1fr}
- .heroVisual{height:240px}
 }
 @media(max-width:600px){
  .shell{padding:0 14px 45px}
@@ -155,7 +148,7 @@ td{padding:10px 8px;border-bottom:1px solid #1e3526}
   <div class="logo">ϟ</div>
   <div><strong>Eco<span>Pulse</span></strong><small>LIFEGRID AI · ETHICAL MICROGRID</small></div>
  </a>
- <span class="live" id="liveBadge"><i></i>OPEN-METEO LIVE TELEMETRY</span>
+ <span class="live" id="liveBadge"><i></i><span id="badgeText">SIMULATED FALLBACK</span></span>
 </header>
 
 <!-- UNIFIED HERO SECTION -->
@@ -163,18 +156,12 @@ td{padding:10px 8px;border-bottom:1px solid #1e3526}
  <div>
   <div class="eyebrow">LIFELINE-FIRST NEIGHBOURHOOD ENERGY GRID</div>
   <h1>When the grid fails, EcoPulse protects <em>hospitals, water pumps and the elderly</em> first.</h1>
-  <p>Conventional solar microgrids sell power to the highest bidder. EcoPulse combines real-time satellite weather telemetry with a <strong>Social Priority Constraint Engine</strong>—automatically locking battery reserves for critical medical loads before opening peer-to-peer solar trading.</p>
+  <p>Conventional solar microgrids sell power to the highest bidder. EcoPulse combines real-time weather telemetry with a <strong>Social Priority Constraint Engine</strong>—automatically locking battery reserves for critical medical loads before opening peer-to-peer solar trading.</p>
   <div class="actions">
    <button class="btn primary" id="tourBtn" onclick="run60SecJudgeTour()">▶ Run 60-Sec Live Judge Tour</button>
    <button class="btn secondary" onclick="document.getElementById('lifeline-core').scrollIntoView({behavior:'smooth'})">Inspect Lifeline Engine ↓</button>
   </div>
   <div id="tourStatus" style="margin-top:10px;font:10px 'DM Mono';color:var(--mint);">Ready · Driving real-time dispatch from live Open-Meteo solar telemetry</div>
- </div>
- <div class="heroVisual">
-  <canvas id="globe"></canvas>
-  <div class="float f1"><small>LIVE SOLAR IRRADIANCE</small><strong id="heroIrr">742 W/m²</strong></div>
-  <div class="float f2"><small>LIFELINE RESERVE LOCK</small><strong id="heroLocked">18.0 kWh Protected</strong></div>
-  <div class="float f3"><small>GRID POLICY</small><strong id="heroPolicy">People Before Price</strong></div>
  </div>
 </section>
 
@@ -197,7 +184,7 @@ td{padding:10px 8px;border-bottom:1px solid #1e3526}
  </div>
 </section>
 
-<!-- SECTION 01: LIFELINE-FIRST RESERVE LOCKING (FRONT & CENTRE) -->
+<!-- SECTION 01: LIFELINE-FIRST RESERVE LOCKING -->
 <div class="sectionHead" id="lifeline-core">
  <div>
   <div class="eyebrow">01 / CORE INNOVATION · PEOPLE BEFORE PRICE</div>
@@ -253,14 +240,14 @@ td{padding:10px 8px;border-bottom:1px solid #1e3526}
  <div class="notice" id="aiForecastBanner">🔮 Predictive AI Alert: Calculating time-to-threshold battery autonomy...</div>
 </article>
 
-<!-- SECTION 02: BEFORE VS AFTER PER-HOUSEHOLD IMPACT -->
+<!-- SECTION 02: BEFORE VS AFTER IMPACT -->
 <div class="sectionHead">
  <div>
-  <div class="eyebrow">02 / QUANTIFIED IMPACT &amp; FORMULA TRANSPARENCY</div>
+  <div class="eyebrow">02 / QUANTIFIED IMPACT &amp; ASSUMPTIONS</div>
   <h2>Before vs. After: Grid-Only vs. EcoPulse Lifeline Mutual</h2>
   <p>Verified per-household and 50-home housing society benchmarks using CEA India v19 &amp; PM Surya Ghar standards</p>
  </div>
- <span class="chip">VERIFIED FORMULAS</span>
+ <span class="chip">ASSUMPTIONS &amp; FORMULAS</span>
 </div>
 
 <section class="compareGrid">
@@ -279,11 +266,11 @@ td{padding:10px 8px;border-bottom:1px solid #1e3526}
   <div class="compRow"><span>Medical / Critical Outage Backup</span><strong style="color:var(--green)" id="compBackup">11.5+ hrs (Hard-locked reserve)</strong></div>
   <div class="compRow"><span>Net Monthly Savings / Household</span><strong style="color:var(--green)" id="compMonthlySave">₹1,380 saved / month (32% drop)</strong></div>
   <div class="compRow"><span>Annual CO₂ Avoided (50-Home Society)</span><strong style="color:var(--mint)" id="compCo2Annual">42.8 Tonnes CO₂ / year</strong></div>
-  <div class="compRow"><span>50-Home Colony CapEx Payback</span><strong style="color:var(--gold)" id="compPayback">3.4 Years (Post PM Surya Ghar CFA)</strong></div>
+  <div class="compRow"><span>50-Home Colony CapEx Payback</span><strong style="color:var(--gold)" id="compPayback">3.4 Years (Assumed ₹14.5L net cost, verify before pitching)</strong></div>
  </div>
 </section>
 
-<!-- SECTION 03: LIVE MICROGRID FLOW, TRUST LEDGER & SCENARIO-AWARE AI COPILOT -->
+<!-- SECTION 03: LIVE MICROGRID FLOW, TRUST LEDGER & AI COPILOT -->
 <div class="sectionHead">
  <div>
   <div class="eyebrow">03 / AUTONOMOUS DISPATCH &amp; DECISION INTELLIGENCE</div>
@@ -347,7 +334,7 @@ td{padding:10px 8px;border-bottom:1px solid #1e3526}
  </article>
 </section>
 
-<!-- SECTION 04: BUSINESS MODEL & 3-STEP ROADMAP -->
+<!-- SECTION 04: BUSINESS MODEL & ROADMAP -->
 <div class="sectionHead">
  <div>
   <div class="eyebrow">04 / COMMERCIAL VIABILITY &amp; EXECUTION PLAN</div>
@@ -409,9 +396,6 @@ const $ = id => document.getElementById(id);
 const fmt = n => Number(n).toFixed(1);
 const clamp = (n,a,b) => Math.max(a,Math.min(b,n));
 
-/* =========================================================
-   1. UNIFIED LIFEGRID AI ENGINE (ZERO-LATENCY + LIVE API)
-   ========================================================= */
 const appState = {
  city: "Chennai, Tamil Nadu",
  lat: 13.0827,
@@ -419,7 +403,7 @@ const appState = {
  irradiance: 742,
  cloudCover: 14,
  tempC: 31.8,
- policy: "LIFELINE_ACTIVE", // NORMAL_MARKET | LIFELINE_ACTIVE | CYCLONE_PRECHARGE | OUTAGE_SHIELD
+ policy: "LIFELINE_ACTIVE",
  hour: 12,
  timer: null,
  gridTariff: 8.50,
@@ -488,7 +472,6 @@ function renderAll() {
 
  appState.latestSummary = { totalGen, totalLoad, lockedKwh, clearedP2P, savingsHr, co2Hr };
 
- // Update Hero & KPIs
  $("heroIrr").textContent = `${appState.irradiance} W/m²`;
  $("heroLocked").textContent = appState.policy === "NORMAL_MARKET" ? "0.0 kWh (Unprotected)" : `${lockedKwh.toFixed(1)} kWh Protected`;
  $("heroPolicy").textContent = appState.policy.replace("_", " ");
@@ -505,12 +488,10 @@ function renderAll() {
  $("barSavings").style.width = `${clamp((savingsHr / 45) * 100, 10, 100)}%`;
  $("barCo2").style.width = `${clamp((co2Hr / 10) * 100, 10, 100)}%`;
 
- // Update Active Button Styling
  document.querySelectorAll(".mBtn").forEach(b => b.classList.remove("active"));
  const activeBtn = $(`btn-${appState.policy}`);
  if (activeBtn) activeBtn.classList.add("active");
 
- // Render Lifeline Node Table
  $("nodeTableBody").innerHTML = evaluated.map(n => {
   const statusHtml = appState.policy === "NORMAL_MARKET" && n.isLifeline
    ? `<span style="color:var(--red);font-weight:700">⚠️ Exposed to P2P Drain</span>`
@@ -531,20 +512,17 @@ function renderAll() {
    </tr>`;
  }).join("");
 
- // Quantitative AI Forecast Alert
  const topMed = evaluated[0];
  $("aiForecastBanner").innerHTML = appState.policy === "NORMAL_MARKET"
   ? `⚠️ <strong>VULNERABILITY ALERT (Price-Only Dispatch):</strong> Without Lifeline-First locking, ${topMed.name} (${topMed.detail}) is projected to hit critical battery depletion by <strong>${topMed.etaStr} IST</strong>. Switch to <em>Lifeline-First Active</em> to lock ${topMed.locked} kWh immediately.`
   : `🔮 <strong>PREDICTIVE AI DISPATCH:</strong> At <strong>${appState.irradiance} W/m²</strong> live irradiance, EcoPulse has locked <strong>${lockedKwh.toFixed(1)} kWh</strong> across medical &amp; civic lifeline nodes—extending ${topMed.name} autonomy past <strong>${topMed.etaStr} IST</strong> while clearing <strong>${clearedP2P} kW</strong> locally.`;
 
- // Update Before vs After Comparison Impact
  const monthlyPerHome = Math.round((savingsHr * 10 * 30) / 6 + 650);
  const annual50Co2 = +((co2Hr * 10 * 365 * (50 / 6)) / 1000).toFixed(1);
  $("compBackup").textContent = appState.policy === "NORMAL_MARKET" ? "1.4 hrs (Unprotected)" : "11.5+ hrs (Hard-locked reserve)";
  $("compMonthlySave").textContent = `₹${monthlyPerHome.toLocaleString("en-IN")} saved / month (32% drop)`;
  $("compCo2Annual").textContent = `${annual50Co2} Tonnes CO₂ / year`;
 
- // Render SHA-256 Hash-Chained Ledger
  const sellers = evaluated.filter(n => n.exportKw > 0);
  const buyers = evaluated.filter(n => n.deficitKw > 0);
  if (sellers.length && buyers.length && clearedP2P > 0) {
@@ -598,16 +576,23 @@ async function syncCity() {
    appState.irradiance = w.current.shortwave_radiation > 25 ? w.current.shortwave_radiation : 715;
    appState.cloudCover = w.current.cloud_cover ?? 15;
    appState.tempC = w.current.temperature_2m ?? 31.0;
+   $("liveBadge").style.borderColor = "#426144";
+   $("badgeText").textContent = "OPEN-METEO LIVE TELEMETRY";
   }
   renderAll();
   toast(`Live weather synced: ${appState.city}`);
  } catch (e) {
+  $("liveBadge").style.borderColor = "#78350f";
+  $("badgeText").textContent = "SIMULATED FALLBACK";
   toast("Using calibrated solar baseline");
  }
 }
 
-/* 60-Second Guided Judge Tour */
+/* Fix 3: Tour Timers Fix (Prevent Overlapping Timers) */
+let tourTimers = [];
 function run60SecJudgeTour() {
+ tourTimers.forEach(clearTimeout);
+ tourTimers = [];
  const steps = [
   { t: 0,     p: "NORMAL_MARKET",     msg: "Step 1/4: Before EcoPulse — Price-only P2P leaves Care Home exposed" },
   { t: 15000, p: "LIFELINE_ACTIVE",   msg: "Step 2/4: After EcoPulse — 18.0 kWh hard-locked for medical & water nodes" },
@@ -615,14 +600,13 @@ function run60SecJudgeTour() {
   { t: 45000, p: "OUTAGE_SHIELD",     msg: "Step 4/4: Grid Blackout — Islanded microgrid keeps ICU & pumps online!" }
  ];
  steps.forEach(s => {
-  setTimeout(() => {
+  tourTimers.push(setTimeout(() => {
    $("tourStatus").textContent = s.msg;
    setPolicy(s.p);
-  }, s.t);
+  }, s.t));
  });
 }
 
-/* Scenario-Aware AI Copilot */
 async function askLifeGridAI(customQ) {
  const q = (customQ || $("aiInput").value).trim();
  if (!q) return;
@@ -636,7 +620,7 @@ async function askLifeGridAI(customQ) {
    return `🚨 Outage & Cyclone Protocol (${appState.city} · ${appState.irradiance} W/m²): When feeder failure is detected, EcoPulse triggers IEEE 1547 islanding, sheds deferrable EV loads, and locks ${s.lockedKwh.toFixed(1)} kWh exclusively for Care Home #4 (Score 98), Primary Clinic (Score 95), and Water Pumps (Score 91)—guaranteeing 11.5+ hours of uninterrupted medical backup.`;
   }
   if (ql.includes("roi") || ql.includes("co2") || ql.includes("formula") || ql.includes("payback")) {
-   return `📐 Verified Colony Economics: Clearing ${s.clearedP2P} kW locally at ₹4.80/kWh instead of ₹8.50/kWh utility peak slabs saves ₹${s.savingsHr.toFixed(2)}/hr and avoids ${s.co2Hr.toFixed(2)} kg CO₂/hr (using CEA India's 0.716 kg/kWh grid factor). Across a 50-home RWA with PM Surya Ghar subsidies (₹14.5L net CapEx), full payback is achieved in 3.4 years.`;
+   return `📐 Verified Colony Economics: Clearing ${s.clearedP2P} kW locally at ₹4.80/kWh instead of ₹8.50/kWh utility peak slabs saves ₹${s.savingsHr.toFixed(2)}/hr and avoids ${s.co2Hr.toFixed(2)} kg CO₂/hr (using CEA India's 0.716 kg/kWh grid factor). Across a 50-home RWA with PM Surya Ghar subsidies (assumed ₹14.5L net CapEx), full payback is achieved in 3.4 years.`;
   }
   return `⚡ Live Grid Status (${appState.policy.replace("_", " ")}): Generating ${s.totalGen.toFixed(1)} kW across rooftop arrays under ${appState.irradiance} W/m² solar irradiance. ${s.lockedKwh.toFixed(1)} kWh is hard-locked for Lifeline nodes before routing ${s.clearedP2P} kW in SHA-256 verified P2P trades.`;
  };
@@ -661,7 +645,6 @@ $("aiInput").addEventListener("keydown", e => { if (e.key === "Enter") askLifeGr
 $("hourSlider").addEventListener("input", e => {
  clearInterval(appState.timer);
  appState.timer = null;
- $("playBtn").textContent = "▶";
  appState.hour = +e.target.value;
  renderAll();
 });
@@ -686,7 +669,7 @@ function toast(msg) {
  setTimeout(() => $("toast").classList.remove("show"), 2200);
 }
 
-/* 3D Globe & Animated Microgrid Flow */
+/* 3D Globe & Animated Flow */
 function initVisuals() {
  const canvas = $("globe");
  if (window.THREE && canvas) {
@@ -758,9 +741,9 @@ function initVisuals() {
  }
 }
 
-// Instant 0ms boot + background live Open-Meteo sync
 renderAll();
 initVisuals();
+
 window.addEventListener("DOMContentLoaded", async () => {
  try {
   const wRes = await fetch("https://api.open-meteo.com/v1/forecast?latitude=13.0827&longitude=80.2707&current=shortwave_radiation,cloud_cover,temperature_2m&timezone=auto");
@@ -769,13 +752,18 @@ window.addEventListener("DOMContentLoaded", async () => {
    appState.irradiance = w.current.shortwave_radiation > 25 ? w.current.shortwave_radiation : 742;
    appState.cloudCover = w.current.cloud_cover ?? 14;
    appState.tempC = w.current.temperature_2m ?? 31.8;
+   $("liveBadge").style.borderColor = "#426144";
+   $("badgeText").textContent = "OPEN-METEO LIVE TELEMETRY";
    renderAll();
   }
- } catch (e) {}
+ } catch (e) {
+  $("liveBadge").style.borderColor = "#78350f";
+  $("badgeText").textContent = "SIMULATED FALLBACK";
+ }
 });
 
 if ("serviceWorker" in navigator && location.protocol.startsWith("http")) {
- navigator.serviceWorker.register("/sw.js").catch(() => {});
+ navigator.serviceWorker.register("/sw.js").then(reg => reg.update()).catch(() => {});
 }
 </script>
 </body>
