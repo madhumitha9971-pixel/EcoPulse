@@ -18,7 +18,7 @@
 ![PWA](https://img.shields.io/badge/PWA-Ready-5A0FC8?style=flat-square)
 ![Status](https://img.shields.io/badge/Status-Prototype-orange?style=flat-square)
 
-**Live Demo:** [https://ecopulse-gc1mro6ny-madhumithadcse2024-2705.vercel.app/]
+**Live url:** [https://ecopulse-nu.vercel.app/]
 **Repository:** [github.com/madhumitha9971-pixel/EcoPulse](https://github.com/madhumitha9971-pixel/EcoPulse)
 
 ---
