@@ -37,25 +37,27 @@ header{min-height:68px;display:flex;align-items:center;justify-content:space-bet
 .btn{border:1px solid transparent;border-radius:9px;padding:9px 14px;font-size:11.5px;font-weight:800;transition:.15s}
 .primary{background:var(--green);color:#0a1b10}
 .primary:hover{filter:brightness(1.06)}
+.secondary{background:#142b1c;color:#d0f6b1;border-color:#38583e}
 
-/* Compact 3D Telemetry Deck (No Essays) */
-.deckTop{display:grid;grid-template-columns:1.25fr .75fr;align-items:center;gap:14px;margin:16px 0 14px}
-.visualBox{height:210px;position:relative;border:1px solid var(--line);border-radius:15px;background:radial-gradient(ellipse at center,#163824 0,#09170f 75%);overflow:hidden}
+/* Top Control + 3D World Globe with Orbiting Text Ring */
+.deckTop{display:grid;grid-template-columns:1.15fr .85fr;align-items:stretch;gap:14px;margin:16px 0 14px}
+.controlCol{display:flex;flex-direction:column;justify-content:space-between;gap:10px}
+.visualBox{min-height:245px;position:relative;border:1px solid var(--line);border-radius:15px;background:radial-gradient(ellipse at center,#183f28 0,#08150d 78%);overflow:hidden}
 #globe{width:100%;height:100%;display:block}
-.float{position:absolute;background:#0b1b12eb;border:1px solid #466348;border-radius:9px;padding:6px 10px}
+.float{position:absolute;background:#0b1b12eb;border:1px solid #466348;border-radius:9px;padding:6px 10px;pointer-events:none}
 .float small{display:block;color:var(--muted);font:8px "DM Mono";letter-spacing:1px}
 .float strong{color:var(--green);font-size:12.5px}
-.f1{right:10px;top:10px}.f2{left:10px;bottom:10px}.f3{right:10px;bottom:10px}
+.f1{right:10px;top:10px}.f2{left:10px;bottom:10px}.f3{right:10px;bottom:10px}.f4{left:10px;top:10px}
 
-.statusBar{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:10px;font:11px "DM Mono";color:var(--muted)}
+.statusBar{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;font:11px "DM Mono";color:var(--muted)}
 .chip{border:1px solid #38583e;background:#142b1c;color:#d0f6b1;border-radius:30px;padding:5px 11px;font:9px "DM Mono";white-space:nowrap}
 
 /* Mode & City Control Bar */
-.modeBar{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:10px;background:#0d1c13;padding:12px 14px;border-radius:12px;border:1px solid var(--line)}
-.modeBtns{display:flex;flex-wrap:wrap;gap:6px}
-.mBtn{padding:8px 12px;border-radius:8px;border:1px solid #38583e;background:#13281b;color:#d6ebd9;font-size:11.5px;font-weight:700}
+.modeBar{display:flex;flex-direction:column;gap:10px;background:#0d1c13;padding:13px 14px;border-radius:12px;border:1px solid var(--line)}
+.modeBtns{display:grid;grid-template-columns:repeat(2,1fr);gap:7px}
+.mBtn{padding:9px 11px;border-radius:8px;border:1px solid #38583e;background:#13281b;color:#d6ebd9;font-size:11.5px;font-weight:700;text-align:left}
 .mBtn.active{background:var(--green);color:#091a10;border-color:var(--green)}
-.cityBox{display:flex;gap:6px;align-items:center;margin-top:8px;width:100%}
+.cityBox{display:flex;gap:6px;align-items:center;width:100%}
 .cityBox input{flex:1}
 .field{border:1px solid #36543d;background:#08150d;color:var(--text);border-radius:8px;padding:8px 11px;font-size:12px;outline:none}
 .field:focus{border-color:var(--green)}
@@ -122,6 +124,7 @@ td{padding:10px 8px;border-bottom:1px solid #1e3526}
 @media(max-width:600px){
  .shell{padding:0 12px 40px}
  .metrics{grid-template-columns:1fr 1fr}
+ .modeBtns{grid-template-columns:1fr}
 }
 </style>
 </head>
@@ -136,14 +139,15 @@ td{padding:10px 8px;border-bottom:1px solid #1e3526}
  </a>
  <div class="topActions">
   <span id="tourStatus" style="font:10px 'DM Mono';color:var(--mint)"></span>
+  <button class="btn secondary" onclick="exportAuditCSV()">⬇ Export RWA Audit CSV</button>
   <button class="btn primary" id="tourBtn" onclick="run60SecJudgeTour()">▶ 60-Sec Auto Demo</button>
   <span class="live" id="liveBadge"><i></i><span id="badgeText">SIMULATED FALLBACK</span></span>
  </div>
 </header>
 
-<!-- TOP CONTROL + 3D MICROGRID NODE GLOBE -->
+<!-- TOP CONTROL + 3D WORLD GLOBE WITH ROUNDING TEXT RING -->
 <section class="deckTop">
- <div>
+ <div class="controlCol">
   <div class="statusBar">
    <span id="weatherStrip">📍 Chennai, Tamil Nadu · Solar: 742 W/m² · Cloud: 14% · Temp: 31.8°C</span>
    <span class="chip" id="policyChip">POLICY: LIFELINE-FIRST ACTIVE</span>
@@ -164,9 +168,10 @@ td{padding:10px 8px;border-bottom:1px solid #1e3526}
 
  <div class="visualBox">
   <canvas id="globe"></canvas>
+  <div class="float f4"><small>GRID SYNC</small><strong id="heroFreq">50.02 Hz · 230V</strong></div>
   <div class="float f1"><small>IRRADIANCE</small><strong id="heroIrr">742 W/m²</strong></div>
   <div class="float f2"><small>RESERVE LOCK</small><strong id="heroLocked">18.0 kWh</strong></div>
-  <div class="float f3"><small>MESH</small><strong>06 Nodes</strong></div>
+  <div class="float f3"><small>IEEE 1547</small><strong id="heroIsland">Grid-Tied</strong></div>
  </div>
 </section>
 
@@ -298,7 +303,8 @@ const appState = {
   { id: "N-05", name: "Block C Rooftop", detail: "Community Solar Prosumer", score: 32, isLifeline: false, capKwh: 13.5, soc: 85, panelKw: 6.5, loadKw: 1.3 },
   { id: "N-06", name: "EV & Visitor Chargers", detail: "Deferrable High-Draw Load", score: 15, isLifeline: false, capKwh: 15.0, soc: 58, panelKw: 0.0, loadKw: 4.2 }
  ],
- latestSummary: {}
+ latestSummary: {},
+ latestEvaluated: []
 };
 
 function pseudoHash(str) {
@@ -352,9 +358,12 @@ function renderAll() {
  const co2Hr = +(clearedP2P * appState.ceaFactor).toFixed(2);
 
  appState.latestSummary = { totalGen, totalLoad, lockedKwh, clearedP2P, savingsHr, co2Hr };
+ appState.latestEvaluated = evaluated;
 
  $("heroIrr").textContent = `${appState.irradiance} W/m²`;
  $("heroLocked").textContent = appState.policy === "NORMAL_MARKET" ? "0.0 kWh" : `${lockedKwh.toFixed(1)} kWh`;
+ $("heroFreq").textContent = appState.policy === "OUTAGE_SHIELD" ? "49.98 Hz · Island" : "50.02 Hz · 230V";
+ $("heroIsland").textContent = appState.policy === "OUTAGE_SHIELD" ? "ISLANDED" : "Grid-Tied";
  $("policyChip").textContent = `POLICY: ${appState.policy.replace("_", " ")}`;
  $("weatherStrip").textContent = `📍 ${appState.city} · Solar: ${appState.irradiance} W/m² · Cloud: ${appState.cloudCover}% · Temp: ${appState.tempC}°C`;
 
@@ -438,6 +447,34 @@ function toggleNode(id) {
  }
 }
 
+/* Export Live RWA Compliance & Carbon Audit CSV */
+function exportAuditCSV() {
+ const rows = [
+  ["Timestamp", "City", "Active_Policy", "Irradiance_Wm2", "Node_ID", "Node_Name", "Social_Score", "Lifeline_Locked", "Locked_kWh", "Solar_kW", "Load_kW", "Battery_SoC_Pct"],
+  ...appState.latestEvaluated.map(n => [
+   new Date().toISOString(),
+   `"${appState.city}"`,
+   appState.policy,
+   appState.irradiance,
+   n.id,
+   `"${n.name}"`,
+   n.score,
+   n.protectedLock ? "YES" : "NO",
+   n.locked,
+   n.gen,
+   n.load,
+   n.soc
+  ])
+ ];
+ const csv = rows.map(r => r.join(",")).join("\n");
+ const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+ const link = document.createElement("a");
+ link.href = URL.createObjectURL(blob);
+ link.download = `EcoPulse_RWA_Audit_${appState.policy}.csv`;
+ link.click();
+ toast("Downloaded RWA Audit CSV!");
+}
+
 async function syncCity() {
  const q = $("cityInput").value.trim();
  if (!q) return;
@@ -496,7 +533,7 @@ async function askLifeGridAI(customQ) {
  const localReply = () => {
   const ql = q.toLowerCase();
   if (ql.includes("cyclone") || ql.includes("blackout") || ql.includes("outage")) {
-   return `🚨 Outage Protocol (${appState.city}): IEEE 1547 islanding active. EV loads shed; ${s.lockedKwh.toFixed(1)} kWh locked for Care Home #4 & Water Pumps (11.5+ hrs backup).`;
+   return `🚨 Outage Protocol (${appState.city}): IEEE 1547 islanding active (49.98 Hz). EV loads shed; ${s.lockedKwh.toFixed(1)} kWh locked for Care Home #4 & Water Pumps (11.5+ hrs backup).`;
   }
   if (ql.includes("roi") || ql.includes("co2") || ql.includes("math") || ql.includes("tariff")) {
    return `📐 Live Economics: Clearing ${s.clearedP2P} kW @ ₹4.80 vs ₹8.50 saves ₹${s.savingsHr.toFixed(2)}/hr and avoids ${s.co2Hr.toFixed(2)} kg CO₂/hr (0.716 kg/kWh CEA factor).`;
@@ -548,59 +585,123 @@ function toast(msg) {
  setTimeout(() => $("toast").classList.remove("show"), 2000);
 }
 
-/* 3D Microgrid Globe + 2D Flow Visualizer */
+/* 3D World Globe with Orbiting Text Ring + 2D Flow Visualizer */
 function initVisuals() {
  const canvas = $("globe");
- if (window.THREE && canvas) {
+ if (canvas) {
   try {
+   if (!window.THREE) throw new Error("No WebGL");
    const scene = new THREE.Scene();
-   const camera = new THREE.PerspectiveCamera(38, 1, .1, 100);
-   camera.position.z = 4.6;
+   const camera = new THREE.PerspectiveCamera(36, 1, 0.1, 100);
+   camera.position.set(0, 0.45, 4.8);
+   camera.lookAt(0, 0, 0);
+
    const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
-   renderer.setPixelRatio(Math.min(devicePixelRatio, 1.6));
-   const globe = new THREE.Group();
-   scene.add(globe);
-   globe.add(new THREE.Mesh(
-    new THREE.IcosahedronGeometry(1.25, 2),
-    new THREE.MeshBasicMaterial({ color: 0x315c3b, wireframe: true, transparent: true, opacity: .55 })
-   ));
+   renderer.setPixelRatio(Math.min(devicePixelRatio, 1.8));
+
+   const worldGroup = new THREE.Group();
+   scene.add(worldGroup);
+
+   // 1. Dark Emerald Core Planet Sphere
+   const coreSphere = new THREE.Mesh(
+    new THREE.SphereGeometry(1.12, 32, 32),
+    new THREE.MeshBasicMaterial({ color: 0x0d2618, transparent: true, opacity: 0.92 })
+   );
+   worldGroup.add(coreSphere);
+
+   // 2. Latitude/Longitude Geodesic Wireframe Grid
+   const wireGlobe = new THREE.Mesh(
+    new THREE.SphereGeometry(1.14, 24, 18),
+    new THREE.MeshBasicMaterial({ color: 0x3b7a4c, wireframe: true, transparent: true, opacity: 0.38 })
+   );
+   worldGroup.add(wireGlobe);
+
+   // 3. Glowing Microgrid Node Points & P2P Energy Arcs
    const pts = [];
    for (let i = 0; i < 85; i++) {
-    const y = 1 - 2 * (i + .5) / 85, r = Math.sqrt(1 - y * y), a = Math.PI * (3 - Math.sqrt(5)) * i;
-    pts.push(new THREE.Vector3(Math.cos(a) * r, y, Math.sin(a) * r).multiplyScalar(1.28));
+    const y = 1 - 2 * (i + 0.5) / 85;
+    const r = Math.sqrt(1 - y * y);
+    const a = Math.PI * (3 - Math.sqrt(5)) * i;
+    pts.push(new THREE.Vector3(Math.cos(a) * r, y, Math.sin(a) * r).multiplyScalar(1.16));
    }
-   globe.add(new THREE.Points(
+   worldGroup.add(new THREE.Points(
     new THREE.BufferGeometry().setFromPoints(pts),
-    new THREE.PointsMaterial({ color: 0xa7f36b, size: .045 })
+    new THREE.PointsMaterial({ color: 0xa7f36b, size: 0.048 })
    ));
-   for (let i = 0; i < pts.length; i += 4) {
-    globe.add(new THREE.Line(
-     new THREE.BufferGeometry().setFromPoints([pts[i], pts[(i + 17) % pts.length]]),
-     new THREE.LineBasicMaterial({ color: 0x62d994, transparent: true, opacity: .28 })
+
+   for (let i = 0; i < pts.length; i += 5) {
+    worldGroup.add(new THREE.Line(
+     new THREE.BufferGeometry().setFromPoints([pts[i], pts[(i + 19) % pts.length]]),
+     new THREE.LineBasicMaterial({ color: 0x4ee0a0, transparent: true, opacity: 0.35 })
     ));
    }
-   const ring = new THREE.Mesh(
-    new THREE.TorusGeometry(1.58, .01, 8, 120),
-    new THREE.MeshBasicMaterial({ color: 0x9bea68, transparent: true, opacity: .45 })
+
+   // 4. 3D Orbiting Text Ring ("ECOPULSE • LIFELINE-FIRST MICROGRID •")
+   const txtCanvas = document.createElement("canvas");
+   txtCanvas.width = 2048;
+   txtCanvas.height = 128;
+   const tCtx = txtCanvas.getContext("2d");
+   tCtx.clearRect(0, 0, 2048, 128);
+   tCtx.fillStyle = "rgba(16, 42, 27, 0.72)";
+   tCtx.fillRect(0, 22, 2048, 84);
+   tCtx.strokeStyle = "#4ee0a0";
+   tCtx.lineWidth = 4;
+   tCtx.strokeRect(0, 22, 2048, 84);
+   tCtx.font = "bold 42px 'DM Mono', monospace";
+   tCtx.fillStyle = "#d8ffc0";
+   tCtx.textAlign = "center";
+   tCtx.textBaseline = "middle";
+   tCtx.fillText("ECOPULSE LIFEGRID AI  •  PEOPLE BEFORE PRICE  •  IEEE 1547 ISLANDING  •  ", 1024, 64);
+
+   const textTex = new THREE.CanvasTexture(txtCanvas);
+   textTex.wrapS = THREE.RepeatWrapping;
+   textTex.repeat.set(1, 1);
+
+   const ringBand = new THREE.Mesh(
+    new THREE.CylinderGeometry(1.62, 1.62, 0.24, 64, 1, true),
+    new THREE.MeshBasicMaterial({ map: textTex, transparent: true, side: THREE.DoubleSide })
    );
-   ring.rotation.x = 1.1;
-   globe.add(ring);
+   ringBand.rotation.z = 0.22;
+   ringBand.rotation.x = 0.14;
+   scene.add(ringBand);
 
    const resize = () => {
-    const w = canvas.clientWidth || 320, h = canvas.clientHeight || 210;
+    const w = canvas.clientWidth || 340, h = canvas.clientHeight || 245;
     renderer.setSize(w, h, false);
     camera.aspect = w / h;
     camera.updateProjectionMatrix();
    };
    resize();
    window.addEventListener("resize", resize);
+
    (function anim() {
     requestAnimationFrame(anim);
-    globe.rotation.y += .004;
-    ring.rotation.z += .0015;
+    worldGroup.rotation.y += 0.0045;
+    ringBand.rotation.y -= 0.0065;
     renderer.render(scene, camera);
    })();
-  } catch (e) {}
+  } catch (e) {
+   // Clean 2D Rotating World + Text Fallback
+   const ctx = canvas.getContext("2d");
+   let ang = 0;
+   const draw2D = () => {
+    const w = canvas.width = canvas.clientWidth * devicePixelRatio;
+    const h = canvas.height = canvas.clientHeight * devicePixelRatio;
+    ctx.clearRect(0, 0, w, h);
+    const cx = w / 2, cy = h / 2, r = Math.min(w, h) * 0.32;
+    ctx.strokeStyle = "#4ee0a0";
+    ctx.lineWidth = 1.5 * devicePixelRatio;
+    ctx.beginPath(); ctx.arc(cx, cy, r, 0, Math.PI * 2); ctx.stroke();
+    for (let i = 0; i < 6; i++) {
+     ctx.beginPath();
+     ctx.ellipse(cx, cy, r, r * (0.2 + i * 0.12), ang + i * 0.4, 0, Math.PI * 2);
+     ctx.stroke();
+    }
+    ang += 0.005;
+    requestAnimationFrame(draw2D);
+   };
+   draw2D();
+  }
  }
 
  const fCanvas = $("flow");
