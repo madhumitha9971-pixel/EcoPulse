@@ -14,7 +14,7 @@
  --bg:#07110d;--panel:#102219;--panel2:#142d1e;
  --line:#294633;--text:#eff8ef;--muted:#91a997;
  --green:#a7f36b;--mint:#4ee0a0;--blue:#78baff;
- --gold:#f3cf76;--red:#f87171;
+ --gold:#f3cf76;--red:#f87171;--purple:#c084fc;
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
@@ -38,6 +38,8 @@ header{min-height:68px;display:flex;align-items:center;justify-content:space-bet
 .primary{background:var(--green);color:#0a1b10}
 .primary:hover{filter:brightness(1.06)}
 .secondary{background:#142b1c;color:#d0f6b1;border-color:#38583e}
+.purpleBtn{background:#581c87;color:#e9d5ff;border-color:#7e22ce}
+.purpleBtn.active{background:#9333ea;color:#fff}
 
 /* Top Control + 3D World Globe with Orbiting Text Ring */
 .deckTop{display:grid;grid-template-columns:1.15fr .85fr;align-items:stretch;gap:14px;margin:16px 0 14px}
@@ -57,6 +59,13 @@ header{min-height:68px;display:flex;align-items:center;justify-content:space-bet
 .modeBtns{display:grid;grid-template-columns:repeat(2,1fr);gap:7px}
 .mBtn{padding:9px 11px;border-radius:8px;border:1px solid #38583e;background:#13281b;color:#d6ebd9;font-size:11.5px;font-weight:700;text-align:left}
 .mBtn.active{background:var(--green);color:#091a10;border-color:var(--green)}
+
+/* Innovation Bar (LoRa Mesh & VPP Slider) */
+.innovBar{display:grid;grid-template-columns:1fr 1.25fr;gap:10px;align-items:center;background:#09160e;padding:10px 14px;border-radius:10px;border:1px solid #284232}
+.vppBox{display:flex;flex-direction:column;gap:3px}
+.vppBox label{font:9px "DM Mono";color:var(--gold);letter-spacing:.8px}
+.vppBox input{width:100%;accent-color:var(--gold)}
+
 .cityBox{display:flex;gap:6px;align-items:center;width:100%}
 .cityBox input{flex:1}
 .field{border:1px solid #36543d;background:#08150d;color:var(--text);border-radius:8px;padding:8px 11px;font-size:12px;outline:none}
@@ -84,8 +93,12 @@ table{width:100%;border-collapse:collapse;font-size:12.5px;text-align:left}
 th{padding:8px;border-bottom:1px solid #294633;color:var(--muted);font:9px "DM Mono";letter-spacing:0.8px;text-transform:uppercase}
 td{padding:10px 8px;border-bottom:1px solid #1e3526}
 .scoreBadge{padding:3px 8px;border-radius:6px;font:10px "DM Mono";font-weight:700}
+.actionGroup{display:flex;gap:6px;flex-wrap:wrap}
 .lockBtn{padding:6px 10px;border-radius:7px;border:1px solid #456047;background:#163020;color:#fff;font-size:11px;font-weight:700}
 .lockBtn.on{background:#0284c7;border-color:#38bdf8}
+.sosBtn{padding:6px 10px;border-radius:7px;border:1px solid #991b1b;background:#7f1d1d;color:#fca5a5;font-size:11px;font-weight:800}
+.sosBtn.active{background:#dc2626;color:#fff;animation:pulse 1s infinite}
+@keyframes pulse{0%{opacity:1}50%{opacity:.6}100%{opacity:1}}
 
 /* Compact Comparison Strip */
 .compareGrid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px}
@@ -120,6 +133,7 @@ td{padding:10px 8px;border-bottom:1px solid #1e3526}
 @media(max-width:900px){
  .deckTop,.grid,.compareGrid{grid-template-columns:1fr}
  .metrics{grid-template-columns:repeat(2,1fr)}
+ .innovBar{grid-template-columns:1fr}
 }
 @media(max-width:600px){
  .shell{padding:0 12px 40px}
@@ -139,8 +153,8 @@ td{padding:10px 8px;border-bottom:1px solid #1e3526}
  </a>
  <div class="topActions">
   <span id="tourStatus" style="font:10px 'DM Mono';color:var(--mint)"></span>
-  <button class="btn secondary" onclick="exportAuditCSV()">⬇ Export RWA Audit CSV</button>
-  <button class="btn primary" id="tourBtn" onclick="run60SecJudgeTour()">▶ 60-Sec Auto Demo</button>
+  <button class="btn secondary" onclick="exportAuditCSV()">⬇ Export Audit CSV</button>
+  <button class="btn primary" id="tourBtn" onclick="run60SecJudgeTour()">▶ 60-Sec Demo</button>
   <span class="live" id="liveBadge"><i></i><span id="badgeText">SIMULATED FALLBACK</span></span>
  </div>
 </header>
@@ -159,6 +173,16 @@ td{padding:10px 8px;border-bottom:1px solid #1e3526}
     <button class="mBtn" id="btn-CYCLONE_PRECHARGE" onclick="setPolicy('CYCLONE_PRECHARGE')">🌀 Cyclone 6h Pre-Charge</button>
     <button class="mBtn" id="btn-OUTAGE_SHIELD" onclick="setPolicy('OUTAGE_SHIELD')">🚨 Blackout Islanding</button>
    </div>
+
+   <!-- INNOVATION 1 & 2: LoRa Mesh Toggle & DISCOM VPP Slider -->
+   <div class="innovBar">
+    <button class="btn purpleBtn" id="meshBtn" onclick="toggleMeshMode()">📶 LoRa Mesh: OFF</button>
+    <div class="vppBox">
+     <label id="vppLabel">⚡ DISCOM VPP PEAK EXPORT INCENTIVE: ₹6.20/kWh</label>
+     <input id="vppSlider" type="range" min="4.5" max="12.0" step="0.5" value="6.2">
+    </div>
+   </div>
+
    <div class="cityBox">
     <input class="field" id="cityInput" type="text" placeholder="Sync live city weather (e.g. Madurai, Pune)">
     <button class="btn primary" style="padding:8px 14px" onclick="syncCity()">Sync Weather</button>
@@ -171,7 +195,7 @@ td{padding:10px 8px;border-bottom:1px solid #1e3526}
   <div class="float f4"><small>GRID SYNC</small><strong id="heroFreq">50.02 Hz · 230V</strong></div>
   <div class="float f1"><small>IRRADIANCE</small><strong id="heroIrr">742 W/m²</strong></div>
   <div class="float f2"><small>RESERVE LOCK</small><strong id="heroLocked">18.0 kWh</strong></div>
-  <div class="float f3"><small>IEEE 1547</small><strong id="heroIsland">Grid-Tied</strong></div>
+  <div class="float f3"><small>MESH</small><strong id="heroMeshState">Cloud-Sync</strong></div>
  </div>
 </section>
 
@@ -179,7 +203,7 @@ td{padding:10px 8px;border-bottom:1px solid #1e3526}
 <section class="metrics">
  <article class="metric"><label>LIVE NEIGHBOURHOOD SOLAR</label><div class="value" id="kpiSolar">20.5 <small>kW</small></div><p>Open-Meteo W/m² feed</p><div class="bar"><i id="barSolar" style="width:82%"></i></div></article>
  <article class="metric"><label>PROTECTED LIFELINE RESERVE</label><div class="value" style="color:var(--blue)" id="kpiLocked">18.0 <small>kWh</small></div><p>Hard-locked (Score ≥ 90)</p><div class="bar"><i id="barLocked" style="width:90%;background:var(--blue)"></i></div></article>
- <article class="metric"><label>COLONY TARIFF SAVINGS</label><div class="value" style="color:var(--gold)" id="kpiSavings">₹28.4 <small>/hr</small></div><p>₹4.80 P2P vs ₹8.50 Slab</p><div class="bar"><i id="barSavings" style="width:74%;background:var(--gold)"></i></div></article>
+ <article class="metric"><label>COLONY TARIFF SAVINGS</label><div class="value" style="color:var(--gold)" id="kpiSavings">₹28.4 <small>/hr</small></div><p>P2P vs DISCOM Slab</p><div class="bar"><i id="barSavings" style="width:74%;background:var(--gold)"></i></div></article>
  <article class="metric"><label>CEA CO₂ AVOIDED</label><div class="value" style="color:var(--mint)" id="kpiCo2">5.5 <small>kg/hr</small></div><p>0.716 kg CO₂/kWh factor</p><div class="bar"><i id="barCo2" style="width:78%"></i></div></article>
 </section>
 
@@ -187,8 +211,8 @@ td{padding:10px 8px;border-bottom:1px solid #1e3526}
 <article class="panel">
  <div class="panelTop">
   <div>
-   <h3>Neighbourhood Node Priority Matrix</h3>
-   <p>Toggle Lifeline status to lock battery reserves prior to P2P export</p>
+   <h3>Neighbourhood Node Priority Matrix &amp; Emergency SOS</h3>
+   <p>Toggle Lifeline status or trigger an emergency SOS override for acute medical needs</p>
   </div>
   <span class="chip">06 NODES ONLINE</span>
  </div>
@@ -201,7 +225,7 @@ td{padding:10px 8px;border-bottom:1px solid #1e3526}
      <th>Solar / Load</th>
      <th>Battery &amp; Floor ETA</th>
      <th>Dispatch Status</th>
-     <th>Reserve Lock</th>
+     <th>Actions</th>
     </tr>
    </thead>
    <tbody id="nodeTableBody"></tbody>
@@ -267,7 +291,7 @@ td{padding:10px 8px;border-bottom:1px solid #1e3526}
   <div class="pillRow">
    <button class="pill" onclick="quickAsk('Why are medical nodes locked right now?')">Reserve status?</button>
    <button class="pill" onclick="quickAsk('What happens during a cyclone or blackout?')">Blackout mode?</button>
-   <button class="pill" onclick="quickAsk('Show current tariff savings and CO2 math.')">Tariff &amp; CO₂ math?</button>
+   <button class="pill" onclick="quickAsk('Explain the LoRa Mesh and VPP incentive.')">LoRa &amp; VPP?</button>
   </div>
  </article>
 </section>
@@ -294,7 +318,10 @@ const appState = {
  timer: null,
  gridTariff: 8.50,
  p2pTariff: 4.80,
+ vppIncentive: 6.20,
  ceaFactor: 0.716,
+ sosNodeId: null,
+ meshActive: false,
  nodes: [
   { id: "N-01", name: "Care Home #4", detail: "O₂ Concentrator + Dialysis", score: 98, isLifeline: true,  capKwh: 18.0, soc: 48, panelKw: 3.5, loadKw: 2.6 },
   { id: "N-02", name: "Primary Health Clinic", detail: "Vaccine Cold-Chain + ICU", score: 95, isLifeline: true,  capKwh: 22.0, soc: 45, panelKw: 4.5, loadKw: 3.3 },
@@ -327,17 +354,19 @@ function renderAll() {
  const sorted = [...appState.nodes].sort((a, b) => b.score - a.score);
 
  const evaluated = sorted.map(n => {
+  const isSos = appState.sosNodeId === n.id;
+  const effectiveScore = isSos ? 100 : n.score;
   const gen = +(n.panelKw * irrFactor * diurnalSolar * solarMult).toFixed(2);
   const load = +(n.loadKw * loadMult).toFixed(2);
   const net = +(gen - load).toFixed(2);
-  const locked = n.isLifeline ? +(n.capKwh * floorRatio).toFixed(2) : 0;
+  const locked = (n.isLifeline || isSos) ? +(n.capKwh * floorRatio).toFixed(2) : 0;
   const stored = +(n.capKwh * (n.soc / 100)).toFixed(2);
   const netDrain = Math.max(0.25, load - gen);
-  const hrsLeft = +(Math.max(0.5, (stored - (appState.policy === "NORMAL_MARKET" ? 1.5 : 0)) / netDrain)).toFixed(1);
+  const hrsLeft = +(Math.max(0.5, (stored - (appState.policy === "NORMAL_MARKET" && !isSos ? 1.5 : 0)) / netDrain)).toFixed(1);
   const etaDate = new Date(Date.now() + hrsLeft * 3600000);
   const etaStr = etaDate.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit", hour12: false });
 
-  const protectedLock = (appState.policy !== "NORMAL_MARKET") && n.isLifeline;
+  const protectedLock = (appState.policy !== "NORMAL_MARKET" || isSos) && (n.isLifeline || isSos);
   let exportKw = 0;
   if (net > 0 && !protectedLock && appState.policy !== "OUTAGE_SHIELD" && appState.policy !== "CYCLONE_PRECHARGE") {
    exportKw = net;
@@ -350,21 +379,22 @@ function renderAll() {
   surplusPool += exportKw;
   deficitPool += deficitKw;
 
-  return { ...n, gen, load, locked, hrsLeft, etaStr, protectedLock, exportKw, deficitKw };
+  return { ...n, score: effectiveScore, gen, load, locked, hrsLeft, etaStr, protectedLock, exportKw, deficitKw, isSos };
  });
 
  const clearedP2P = +Math.min(surplusPool, deficitPool).toFixed(2);
- const savingsHr = +(clearedP2P * (appState.gridTariff - appState.p2pTariff)).toFixed(2);
+ const effectiveTariff = appState.vppIncentive > appState.p2pTariff ? appState.vppIncentive : appState.p2pTariff;
+ const savingsHr = +(clearedP2P * (appState.gridTariff - effectiveTariff)).toFixed(2);
  const co2Hr = +(clearedP2P * appState.ceaFactor).toFixed(2);
 
  appState.latestSummary = { totalGen, totalLoad, lockedKwh, clearedP2P, savingsHr, co2Hr };
  appState.latestEvaluated = evaluated;
 
  $("heroIrr").textContent = `${appState.irradiance} W/m²`;
- $("heroLocked").textContent = appState.policy === "NORMAL_MARKET" ? "0.0 kWh" : `${lockedKwh.toFixed(1)} kWh`;
- $("heroFreq").textContent = appState.policy === "OUTAGE_SHIELD" ? "49.98 Hz · Island" : "50.02 Hz · 230V";
- $("heroIsland").textContent = appState.policy === "OUTAGE_SHIELD" ? "ISLANDED" : "Grid-Tied";
- $("policyChip").textContent = `POLICY: ${appState.policy.replace("_", " ")}`;
+ $("heroLocked").textContent = appState.policy === "NORMAL_MARKET" && !appState.sosNodeId ? "0.0 kWh" : `${lockedKwh.toFixed(1)} kWh`;
+ $("heroFreq").textContent = appState.policy === "OUTAGE_SHIELD" || appState.sosNodeId ? "49.98 Hz · Island" : "50.02 Hz · 230V";
+ $("heroMeshState").textContent = appState.meshActive ? "868MHz LoRa" : "Cloud-Sync";
+ $("policyChip").textContent = appState.sosNodeId ? "POLICY: 🚨 EMERGENCY SOS OVERRIDE ACTIVE" : appState.meshActive ? `POLICY: 📶 LoRa MESH DISPATCH (${appState.policy})` : `POLICY: ${appState.policy.replace("_", " ")}`;
  $("weatherStrip").textContent = `📍 ${appState.city} · Solar: ${appState.irradiance} W/m² · Cloud: ${appState.cloudCover}% · Temp: ${appState.tempC}°C`;
 
  $("kpiSolar").innerHTML = `${totalGen.toFixed(1)} <small>kW</small>`;
@@ -379,52 +409,70 @@ function renderAll() {
 
  document.querySelectorAll(".mBtn").forEach(b => b.classList.remove("active"));
  const activeBtn = $(`btn-${appState.policy}`);
- if (activeBtn) activeBtn.classList.add("active");
+ if (activeBtn && !appState.sosNodeId) activeBtn.classList.add("active");
 
  $("nodeTableBody").innerHTML = evaluated.map(n => {
-  const statusHtml = appState.policy === "NORMAL_MARKET" && n.isLifeline
-   ? `<span style="color:var(--red);font-weight:700">⚠️ Exposed to P2P Drain</span>`
-   : n.protectedLock
-    ? `<span style="color:var(--blue);font-weight:700">🔒 Locked (${n.locked} kWh)</span>`
-    : n.exportKw > 0
-     ? `<span style="color:var(--green)">⚡ Routing +${n.exportKw} kW</span>`
-     : `<span style="color:var(--muted)">⚖️ Balanced</span>`;
+  const statusHtml = n.isSos
+   ? `<span style="color:var(--red);font-weight:900">🚨 EMERGENCY SOS ROUTING ACTIVE</span>`
+   : appState.policy === "NORMAL_MARKET" && n.isLifeline
+    ? `<span style="color:var(--red);font-weight:700">⚠️ Exposed to P2P Drain</span>`
+    : n.protectedLock
+     ? `<span style="color:var(--blue);font-weight:700">🔒 Locked (${n.locked} kWh)</span>`
+     : n.exportKw > 0
+      ? `<span style="color:var(--green)">⚡ Routing +${n.exportKw} kW</span>`
+      : `<span style="color:var(--muted)">⚖️ Balanced</span>`;
 
   return `
-   <tr>
+   <tr style="${n.isSos ? 'background:#2f1111' : ''}">
     <td><strong>${n.name}</strong><br><span style="font-size:11px;color:var(--muted)">${n.detail}</span></td>
     <td><span class="scoreBadge" style="background:${n.score >= 90 ? '#7f1d1d' : '#183624'};color:#fff">${n.score}/100</span></td>
     <td><span style="color:var(--green)">+${n.gen}</span> / <span style="color:var(--gold)">-${n.load} kW</span></td>
     <td>${n.soc}% <span style="font-size:11px;color:var(--blue)">(ETA ~${n.etaStr})</span></td>
     <td>${statusHtml}</td>
-    <td><button class="lockBtn ${n.isLifeline ? 'on' : ''}" onclick="toggleNode('${n.id}')">${n.isLifeline ? '🏥 Lifeline ON' : 'Set Lifeline'}</button></td>
+    <td>
+     <div class="actionGroup">
+      <button class="lockBtn ${n.isLifeline ? 'on' : ''}" onclick="toggleNode('${n.id}')">${n.isLifeline ? '🏥 Lifeline' : 'Set'}</button>
+      <button class="sosBtn ${n.isSos ? 'active' : ''}" onclick="toggleSOS('${n.id}')">${n.isSos ? '🚨 SOS ON' : 'SOS'}</button>
+     </div>
+    </td>
    </tr>`;
  }).join("");
 
  const topMed = evaluated[0];
- $("aiForecastBanner").innerHTML = appState.policy === "NORMAL_MARKET"
-  ? `⚠️ <strong>ALERT:</strong> Without reserve locking, ${topMed.name} hits critical cutoff by <strong>${topMed.etaStr} IST</strong>.`
-  : `🔮 <strong>DISPATCH ACTIVE:</strong> Locked <strong>${lockedKwh.toFixed(1)} kWh</strong> for Lifeline nodes (autonomy past <strong>${topMed.etaStr} IST</strong>) · Clearing <strong>${clearedP2P} kW</strong> P2P.`;
+ $("aiForecastBanner").innerHTML = appState.sosNodeId
+  ? `🚨 <strong>EMERGENCY OVERRIDE:</strong> 100% of surplus microgrid power is bypassing normal markets to supply emergency node!`
+  : appState.meshActive
+   ? `📶 <strong>LoRa MESH ACTIVE:</strong> Cloud offline. 6 nodes synchronizing via decentralized 868MHz radio packets.`
+   : appState.policy === "NORMAL_MARKET"
+    ? `⚠️ <strong>ALERT:</strong> Without reserve locking, ${topMed.name} hits critical cutoff by <strong>${topMed.etaStr} IST</strong>.`
+    : `🔮 <strong>DISPATCH ACTIVE:</strong> Locked <strong>${lockedKwh.toFixed(1)} kWh</strong> for Lifeline nodes (autonomy past <strong>${topMed.etaStr} IST</strong>) · Clearing <strong>${clearedP2P} kW</strong> P2P.`;
 
- const monthlyPerHome = Math.round((savingsHr * 10 * 30) / 6 + 650);
+ const monthlyPerHome = Math.round((savingsHr * 10 * 30) / 6 + 750);
  const annual50Co2 = +((co2Hr * 10 * 365 * (50 / 6)) / 1000).toFixed(1);
- $("compBackup").textContent = appState.policy === "NORMAL_MARKET" ? "1.4 hrs (Unprotected)" : "11.5+ hrs (Locked reserve)";
+ $("compBackup").textContent = appState.policy === "NORMAL_MARKET" && !appState.sosNodeId ? "1.4 hrs (Unprotected)" : "11.5+ hrs (Locked reserve)";
  $("compMonthlySave").textContent = `₹${monthlyPerHome.toLocaleString("en-IN")} saved / mo`;
  $("compCo2Annual").textContent = `${annual50Co2} Tonnes / yr`;
 
- const sellers = evaluated.filter(n => n.exportKw > 0);
- const buyers = evaluated.filter(n => n.deficitKw > 0);
- if (sellers.length && buyers.length && clearedP2P > 0) {
-  let prev = "0x00009a1c";
-  $("hashLedger").innerHTML = sellers.slice(0, 3).map((s, idx) => {
-   const b = buyers[idx % buyers.length];
-   const qty = +Math.min(s.exportKw, b.deficitKw).toFixed(2);
-   const h = pseudoHash(`${prev}|${s.id}|${b.id}|${qty}`);
-   prev = h;
-   return `<div style="padding:5px 0;border-bottom:1px solid #1e3526"><span style="color:var(--blue)">[#${idx + 1} · ${h}]</span> ${s.name} → ${b.name}: <strong style="color:var(--green)">${qty} kWh</strong> (Saved ₹${(qty * 3.7).toFixed(2)})</div>`;
-  }).join("");
+ if (appState.sosNodeId) {
+  const sosObj = appState.nodes.find(x => x.id === appState.sosNodeId);
+  $("hashLedger").innerHTML = `<div style="padding:6px;color:#fca5a5">🚨 EMERGENCY BLOCK #${Math.floor(Math.random()*9000+1000)} · SOS OVERRIDE TRIGGERED FOR ${sosObj ? sosObj.name : 'NODE'}: 100% Reserve & Surplus Diverted. (Hash: 0x9f8b2c)</div>`;
+ } else if (appState.meshActive) {
+  $("hashLedger").innerHTML = `<div style="padding:6px;color:var(--purple)">📶 LoRa MESH PACKET · Node Synchronized: [868MHz Local Broadcast] · 6 Nodes verified via cryptographic sign. (Hash: 0x4a7c1e)</div>`;
  } else {
-  $("hashLedger").innerHTML = `<div style="color:var(--gold);padding:6px">🔒 P2P Exports Halted: 100% battery reserve locked for Lifeline nodes.</div>`;
+  const sellers = evaluated.filter(n => n.exportKw > 0);
+  const buyers = evaluated.filter(n => n.deficitKw > 0);
+  if (sellers.length && buyers.length && clearedP2P > 0) {
+   let prev = "0x00009a1c";
+   $("hashLedger").innerHTML = sellers.slice(0, 3).map((s, idx) => {
+    const b = buyers[idx % buyers.length];
+    const qty = +Math.min(s.exportKw, b.deficitKw).toFixed(2);
+    const h = pseudoHash(`${prev}|${s.id}|${b.id}|${qty}`);
+    prev = h;
+    return `<div style="padding:5px 0;border-bottom:1px solid #1e3526"><span style="color:var(--blue)">[#${idx + 1} · ${h}]</span> ${s.name} → ${b.name}: <strong style="color:var(--green)">${qty} kWh</strong> (VPP Rate ₹${appState.vppIncentive}/kWh)</div>`;
+   }).join("");
+  } else {
+   $("hashLedger").innerHTML = `<div style="color:var(--gold);padding:6px">🔒 P2P Exports Halted: 100% battery reserve locked for Lifeline nodes.</div>`;
+  }
  }
 
  $("hourChip").textContent = `${String(appState.hour).padStart(2, "0")}:00 IST`;
@@ -432,10 +480,31 @@ function renderAll() {
 }
 
 function setPolicy(p) {
+ appState.sosNodeId = null;
  appState.policy = p;
  renderAll();
  toast(`Mode: ${p.replace("_", " ")}`);
 }
+
+function toggleMeshMode() {
+ appState.meshActive = !appState.meshActive;
+ const btn = $("meshBtn");
+ if (appState.meshActive) {
+  btn.textContent = "📶 LoRa Mesh: ON";
+  btn.classList.add("purpleBtn");
+  toast("Cloud Offline: Switched to 868MHz LoRa Mesh!");
+ } else {
+  btn.textContent = "📶 LoRa Mesh: OFF";
+  toast("Cloud Restored: Syncing via Vercel Edge");
+ }
+ renderAll();
+}
+
+$("vppSlider").addEventListener("input", e => {
+ appState.vppIncentive = +e.target.value;
+ $("vppLabel").textContent = `⚡ DISCOM VPP PEAK EXPORT INCENTIVE: ₹${appState.vppIncentive.toFixed(1)}/kWh`;
+ renderAll();
+});
 
 function toggleNode(id) {
  const n = appState.nodes.find(x => x.id === id);
@@ -447,14 +516,28 @@ function toggleNode(id) {
  }
 }
 
-/* Export Live RWA Compliance & Carbon Audit CSV */
+function toggleSOS(id) {
+ if (appState.sosNodeId === id) {
+  appState.sosNodeId = null;
+  toast("Emergency SOS Cleared");
+ } else {
+  appState.sosNodeId = id;
+  const n = appState.nodes.find(x => x.id === id);
+  toast(`🚨 EMERGENCY SOS ACTIVATED FOR ${n ? n.name : id}!`);
+ }
+ renderAll();
+}
+
 function exportAuditCSV() {
  const rows = [
-  ["Timestamp", "City", "Active_Policy", "Irradiance_Wm2", "Node_ID", "Node_Name", "Social_Score", "Lifeline_Locked", "Locked_kWh", "Solar_kW", "Load_kW", "Battery_SoC_Pct"],
+  ["Timestamp", "City", "Active_Policy", "LoRa_Mesh_Active", "VPP_Incentive_INR", "SOS_Override_Node", "Irradiance_Wm2", "Node_ID", "Node_Name", "Social_Score", "Lifeline_Locked", "Locked_kWh", "Solar_kW", "Load_kW", "Battery_SoC_Pct"],
   ...appState.latestEvaluated.map(n => [
    new Date().toISOString(),
    `"${appState.city}"`,
    appState.policy,
+   appState.meshActive ? "YES" : "NO",
+   appState.vppIncentive,
+   appState.sosNodeId || "NONE",
    appState.irradiance,
    n.id,
    `"${n.name}"`,
@@ -532,20 +615,22 @@ async function askLifeGridAI(customQ) {
  const s = appState.latestSummary;
  const localReply = () => {
   const ql = q.toLowerCase();
+  if (appState.sosNodeId) return `🚨 EMERGENCY SOS PROTOCOL: 100% of microgrid surplus is locked and routed to the emergency node. All P2P trading is suspended.`;
+  if (appState.meshActive) return `📶 LoRa MESH PROTOCOL: Cloud is offline. All 6 nodes are synchronizing battery reserves and priorities via 868MHz local radio mesh.`;
+  if (ql.includes("lora") || ql.includes("mesh") || ql.includes("vpp") || ql.includes("incentive")) {
+   return `💡 Innovation Highlights: EcoPulse includes an offline 868MHz LoRa mesh fallback for disaster resilience and a VPP peak export slider (currently ₹${appState.vppIncentive}/kWh) for DISCOM revenue.`;
+  }
   if (ql.includes("cyclone") || ql.includes("blackout") || ql.includes("outage")) {
    return `🚨 Outage Protocol (${appState.city}): IEEE 1547 islanding active (49.98 Hz). EV loads shed; ${s.lockedKwh.toFixed(1)} kWh locked for Care Home #4 & Water Pumps (11.5+ hrs backup).`;
   }
-  if (ql.includes("roi") || ql.includes("co2") || ql.includes("math") || ql.includes("tariff")) {
-   return `📐 Live Economics: Clearing ${s.clearedP2P} kW @ ₹4.80 vs ₹8.50 saves ₹${s.savingsHr.toFixed(2)}/hr and avoids ${s.co2Hr.toFixed(2)} kg CO₂/hr (0.716 kg/kWh CEA factor).`;
-  }
-  return `⚡ Status (${appState.policy.replace("_", " ")}): Generating ${s.totalGen.toFixed(1)} kW at ${appState.irradiance} W/m². ${s.lockedKwh.toFixed(1)} kWh locked for Lifeline nodes; ${s.clearedP2P} kW cleared P2P.`;
+  return `⚡ Status (${appState.policy.replace("_", " ")}): Generating ${s.totalGen.toFixed(1)} kW at ${appState.irradiance} W/m². VPP Rate: ₹${appState.vppIncentive}/kWh.`;
  };
 
  try {
   const res = await fetch("/api/ai", {
    method: "POST",
    headers: { "Content-Type": "application/json" },
-   body: JSON.stringify({ prompt: q, gridContext: { ...s, city: appState.city, policy: appState.policy } })
+   body: JSON.stringify({ prompt: q, gridContext: { ...s, city: appState.city, policy: appState.policy, sos: appState.sosNodeId, vpp: appState.vppIncentive, mesh: appState.meshActive } })
   });
   if (!res.ok) throw new Error("Fallback");
   const data = await res.json();
@@ -602,21 +687,18 @@ function initVisuals() {
    const worldGroup = new THREE.Group();
    scene.add(worldGroup);
 
-   // 1. Dark Emerald Core Planet Sphere
    const coreSphere = new THREE.Mesh(
     new THREE.SphereGeometry(1.12, 32, 32),
     new THREE.MeshBasicMaterial({ color: 0x0d2618, transparent: true, opacity: 0.92 })
    );
    worldGroup.add(coreSphere);
 
-   // 2. Latitude/Longitude Geodesic Wireframe Grid
    const wireGlobe = new THREE.Mesh(
     new THREE.SphereGeometry(1.14, 24, 18),
     new THREE.MeshBasicMaterial({ color: 0x3b7a4c, wireframe: true, transparent: true, opacity: 0.38 })
    );
    worldGroup.add(wireGlobe);
 
-   // 3. Glowing Microgrid Node Points & P2P Energy Arcs
    const pts = [];
    for (let i = 0; i < 85; i++) {
     const y = 1 - 2 * (i + 0.5) / 85;
@@ -636,7 +718,6 @@ function initVisuals() {
     ));
    }
 
-   // 4. 3D Orbiting Text Ring ("ECOPULSE • LIFELINE-FIRST MICROGRID •")
    const txtCanvas = document.createElement("canvas");
    txtCanvas.width = 2048;
    txtCanvas.height = 128;
@@ -651,7 +732,7 @@ function initVisuals() {
    tCtx.fillStyle = "#d8ffc0";
    tCtx.textAlign = "center";
    tCtx.textBaseline = "middle";
-   tCtx.fillText("ECOPULSE LIFEGRID AI  •  PEOPLE BEFORE PRICE  •  IEEE 1547 ISLANDING  •  ", 1024, 64);
+   tCtx.fillText("ECOPULSE LIFEGRID AI  •  LORA MESH FALLBACK  •  VPP PEAK SHAVING  •  ", 1024, 64);
 
    const textTex = new THREE.CanvasTexture(txtCanvas);
    textTex.wrapS = THREE.RepeatWrapping;
@@ -681,7 +762,6 @@ function initVisuals() {
     renderer.render(scene, camera);
    })();
   } catch (e) {
-   // Clean 2D Rotating World + Text Fallback
    const ctx = canvas.getContext("2d");
    let ang = 0;
    const draw2D = () => {
